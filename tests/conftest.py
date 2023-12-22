@@ -5,7 +5,9 @@ from tests import Config
 
 @fixture(scope='session')
 def driver(browser):
-    yield WebBrowser(browser)
+    driver = WebBrowser(browser)
+    yield driver
+    driver.quit_driver()
 
 
 def pytest_addoption(parser):

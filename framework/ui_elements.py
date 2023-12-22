@@ -9,26 +9,6 @@ class Locator(NamedTuple):
     selector: str
 
 
-class Dialog:
-    """ Dialog object """
-    ROOT_SELECTOR = '#cfcModal'
-    CLOSE_BUTTON_SELECTOR = '.btnClose'
-
-    def __init__(self, driver):
-        self.driver = driver
-        self._locator = Locator(By.CSS_SELECTOR, self.ROOT_SELECTOR)
-        self._close_btn_selector = f'{self.ROOT_SELECTOR} .modal-header .btnClose[aria-label="סגור"]'
-        self.share_close_button_selector = '.dy-modal-contents .dy-lb-close'
-
-    def close_dialog(self):
-        Button(self._close_btn_selector, self.driver).click()
-        self.driver.wait.until_invisibility_of_element(Locator(By.CSS_SELECTOR, self._close_btn_selector))
-
-    def close_share_window(self):
-        Button(self.share_close_button_selector, self.driver).click()
-        self.driver.wait.until_invisibility_of_element(Locator(By.CSS_SELECTOR, self.share_close_button_selector))
-
-
 class TextInput:
     """ TextInput object """
 
@@ -37,7 +17,7 @@ class TextInput:
         self._driver = driver
         self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
 
-    def enter_text(self, text: str):
+    def enter_text(self, text: str) -> None:
         """ enters text to element """
         element = self._driver.find_element(self._locator)
         element.clear()
@@ -52,7 +32,11 @@ class Button:
         self._driver = driver
         self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
 
-    def click(self):
+    @property
+    def text(self) -> str:
+        return self._driver.get_text(self._locator)
+
+    def click(self) -> None:
         self._driver.click(self._locator)
 
 
@@ -69,10 +53,10 @@ class DropDown:
         element = self._driver.find_element(self._locator)
         return Select(element).options
 
-    def select_by_value(self, value: str):
+    def select_by_value(self, value: str) -> None:
         element = self._driver.find_element(self._locator)
         Select(element).select_by_value(value)
 
-    def select_by_index(self, index: int):
+    def select_by_index(self, index: int) -> None:
         element = self._driver.find_element(self._locator)
         Select(element).select_by_index(index)

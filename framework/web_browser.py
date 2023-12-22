@@ -34,6 +34,11 @@ class WebBrowser:
         self.driver = _create_driver(browser)
         self.wait = Wait(self.driver)
 
+    def quit_driver(self):
+        """ Quits the WebDriver """
+        if self.driver:
+            self.driver.quit()
+
     def get(self, url: str):
         """ gets url and validates page url """
         self.driver.get(url)
@@ -64,6 +69,10 @@ class WebBrowser:
         element = self.find_element(locator)
         self.wait.until_clickable(element)
         element.click()
+
+    def get_text(self, locator: Locator):
+        return self.find_element(locator).text
+
 
 
 class Wait:
