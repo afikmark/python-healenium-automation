@@ -2,7 +2,7 @@ from web_pages.page import Page
 from framework.ui_elements import DropDown, Button, Locator, By
 import re
 from framework.logger import get_logger
-
+from framework.utils import Regex
 logger = get_logger()
 
 
@@ -46,7 +46,7 @@ class InventoryPage(Page):
         for item in inventory_list:
             item_text = item.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
             try:
-                item_name = re.match(r'Sauce Labs (.*)', item_text).group(1)
+                item_name = Regex.match_all_after_prefix(prefix='Sauce Labs ', text=item_text)
             except AttributeError as e:
                 logger.warning(f"an item was not found. item text:\n{item_text} error:{e}")
                 continue

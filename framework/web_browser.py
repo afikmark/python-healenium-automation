@@ -54,7 +54,8 @@ class WebBrowser:
         :return: Web element
         """
         logger.info(f"finding element, {locator.__repr__()}")
-        return self.wait.until_visibility_of_element(locator)
+        return self.wait.until_presence_of_element(locator)
+        # return self.driver.find_element(*locator)
 
     def find_elements(self, locator: Locator) -> list[WebElement]:
         """
@@ -63,7 +64,7 @@ class WebBrowser:
         :return: Web element
         """
         logger.info(f"finding elements, {locator.__repr__()}")
-        return self.wait.until_visibility_of_all_elements(locator)
+        return self.driver.find_elements(*locator)
 
     def click(self, locator: Locator):
         element = self.find_element(locator)
@@ -72,7 +73,6 @@ class WebBrowser:
 
     def get_text(self, locator: Locator):
         return self.find_element(locator).text
-
 
 
 class Wait:
@@ -124,3 +124,10 @@ class Wait:
         :return: True if element is invisible
         """
         return True if self.wait.until(ec.invisibility_of_element_located(locator)) else False
+
+    def until_invisibility_of_all_elements(self, locator) -> bool:
+        """
+           :param locator:
+           :return: True if all elements are invisible
+       """
+        return True if self.wait.until(ec.visibility_of_all_elements_located(locator)) else False

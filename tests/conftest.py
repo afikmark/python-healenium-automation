@@ -3,7 +3,7 @@ from framework.web_browser import WebBrowser
 from tests import Config
 
 
-@fixture(scope='session')
+@fixture(scope='function')
 def driver(browser):
     driver = WebBrowser(browser)
     yield driver

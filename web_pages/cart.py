@@ -1,6 +1,7 @@
 from web_pages.page import Page
 from framework.ui_elements import TextInput, Button, Locator, By
 from framework.logger import get_logger
+from framework.utils import Regex
 
 logger = get_logger()
 
@@ -20,14 +21,33 @@ class CartPage(Page):
 
 
 class CartItemsContainer:
+    CART_CONTENTS_CONTAINER = Locator(By.CSS_SELECTOR, '.cart_contents_container .cart_item')
     ROOT_SELECTOR = Locator(By.CSS_SELECTOR, '.cart_item')
+    REMOVE_ITEM_BTN = '#remove-sauce-labs-{}'
 
     def __init__(self, driver):
         self._driver = driver
+        self._current_item = ''
+
+    def is_cart_empty(self) -> bool:
+        return len(self._driver.find_elements(self.CART_CONTENTS_CONTAINER)) == 0
 
     @property
     def items(self):
         return self._driver.find_elements(self.ROOT_SELECTOR)
+
+    @property
+    def item(self) -> str:
+        return self._current_item
+
+    @item.setter
+    def item(self, item_name) -> None:
+        self._current_item = item_name
+
+    def remove_item_btn(self):
+        item_name = Regex.match_all_after_prefix(prefix='Sauce Labs ', text=self.item)
+        formatted_item = item_name.lower().replace(" ", "-")
+        return Button(self.REMOVE_ITEM_BTN.format(formatted_item), self._driver)
 
     @staticmethod
     def item_price(item):

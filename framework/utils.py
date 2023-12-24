@@ -1,5 +1,6 @@
 from retrying import retry
 from functools import partial
+import re
 
 DEFAULT_WAIT_TIME = 25000
 DEFAULT_STOP_MAX_ATTEMPT_NUMBER = 3
@@ -19,3 +20,10 @@ retry_on_true = partial(
     retry_on_result=lambda value: value is True,
     wrap_exception=True
 )
+
+
+class Regex:
+
+    @staticmethod
+    def match_all_after_prefix(prefix, text):
+        return re.match(rf'{prefix}(.*)', text).group(1)
