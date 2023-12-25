@@ -54,8 +54,7 @@ class WebBrowser:
         :return: Web element
         """
         logger.info(f"finding element, {locator.__repr__()}")
-        return self.wait.until_presence_of_element(locator)
-        # return self.driver.find_element(*locator)
+        return self.driver.find_element(*locator)
 
     def find_elements(self, locator: Locator) -> list[WebElement]:
         """

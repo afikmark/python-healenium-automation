@@ -1,3 +1,6 @@
+import os
+
+
 class Config:
     SUPPORTED_ENVS = ['dev', 'qa']
 
@@ -7,6 +10,11 @@ class Config:
             'qa': 'https://www.saucedemo.com/',
             'prd': 'https://saucelabs.com/'
         }[env]
+
+        self.user = {
+            "default": os.environ.get('DEFAULT_USER'),
+            "password": os.environ.get('DEFAULT_PASSWORD')
+        }
 
         self.browser = {
             'chrome': 'chrome',

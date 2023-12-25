@@ -21,6 +21,11 @@ def pytest_addoption(parser):
                      help="browser for the automation tests",
                      default="chrome")
 
+    parser.addoption("--user",
+                     action="store",
+                     help="user for swag labs",
+                     default="standard")
+
 
 @fixture(scope='session')
 def env(request):
@@ -32,7 +37,12 @@ def browser(request):
     return request.config.getoption("--browser")
 
 
+@fixture(scope="session")
+def user(request):
+    return request.config.getoption("--user")
+
+
 @fixture(scope='session')
-def app_config(env, browser):
+def app_config(env):
     cfg = Config(env)
     return cfg
