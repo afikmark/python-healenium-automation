@@ -1,14 +1,12 @@
-from web_pages.inventory import InventoryPage
-from web_pages.login import LoginPage
 from web_flows import login
 from pytest import mark
 
 
 @mark.ui
-def test_inventory_add_to_cart_button(driver, app_config, user):
-    login_page = LoginPage(driver, app_config.base_url)
+def test_inventory_add_to_cart_button(swag_ui, app_config, user):
+    login_page = swag_ui.login_page
     login(login_page, app_config.user['default'], app_config.user['password'])
-    inventory_page = InventoryPage(driver, app_config.base_url)
+    inventory_page = swag_ui.inventory_page
     inventory_page.item = inventory_page.inventory_items.BACKPACK
     inventory_page.add_to_cart_btn.click()
     # assert tha button changed to "remove" after clicking add to cart

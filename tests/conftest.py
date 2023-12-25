@@ -1,6 +1,7 @@
 from pytest import fixture
 from framework.web_browser import WebBrowser
 from tests import Config
+from web_pages.swag_labs import SwagLabs
 
 
 @fixture(scope='function')
@@ -8,6 +9,11 @@ def driver(browser):
     driver = WebBrowser(browser)
     yield driver
     driver.quit_driver()
+
+
+@fixture(scope="function")
+def swag_ui(driver, app_config):
+    return SwagLabs(driver, app_config.base_url)
 
 
 def pytest_addoption(parser):

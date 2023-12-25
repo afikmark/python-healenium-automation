@@ -1,11 +1,10 @@
 from pytest import mark
 from web_pages.inventory import InventoryPage
-from web_pages.login import LoginPage
 
 
 @mark.ui
-def test_login(driver, app_config, user):
-    login_page = LoginPage(driver, app_config.base_url)
+def test_login(swag_ui, app_config, user):
+    login_page = swag_ui.login_page
     login_page.open()
     assert login_page.is_in_page, 'tests if login page is opened'
     login_page.login(app_config.user['default'], app_config.user['password'])
