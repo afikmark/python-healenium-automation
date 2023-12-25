@@ -1,6 +1,5 @@
 from pytest import mark
 from web_flows import login
-import os
 
 
 @mark.ui
