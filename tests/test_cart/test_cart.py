@@ -16,7 +16,3 @@ def test_remove_item_from_cart(swag_ui, app_config, user):
     cart_page.cart_items_container.item = inventory_page.inventory_items.BACKPACK
     cart_page.cart_items_container.remove_item_btn().click()
     assert cart_page.cart_items_container.is_cart_empty(), 'is cart empty'
-
-
-if __name__ == "__main__":
-    print(os.environ)
