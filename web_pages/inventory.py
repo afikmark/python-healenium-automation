@@ -1,6 +1,5 @@
 from web_pages.page import Page
 from framework.ui_elements import DropDown, Button, Locator, By
-import re
 from framework.logger import get_logger
 from framework.utils import Regex
 
@@ -52,15 +51,11 @@ class InventoryPage(Page):
 
     def get_inventory_item_names(self) -> list[str]:
         """
-        retrieves all items in the inventory container and appends
-        them to the Inventory items names list
+        retrieves all items in the inventory container and returns
+        items names list
         """
-        inventory_item_names = []
-        inventory_list = self.driver.find_elements(self.INVENTORY_LIST)
-        for item in inventory_list:
-            item_text = item.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
-            inventory_item_names.append(item_text)
-        return inventory_item_names
+        return [item.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
+                for item in self.driver.find_elements(self.INVENTORY_LIST)]
 
     def add_item_to_cart(self, item_name):
         self.item = item_name
