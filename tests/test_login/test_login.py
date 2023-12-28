@@ -1,6 +1,7 @@
 from pytest import mark
 
 
+@mark.smoke
 @mark.ui
 def test_login(swag_ui, app_config, user):
     login_page = swag_ui.login_page

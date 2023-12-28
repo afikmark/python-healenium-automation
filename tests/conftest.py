@@ -1,11 +1,13 @@
-from pytest import fixture
+from pytest import fixture, mark
 from framework.web_browser import WebBrowser
 from tests import Config
 from web_pages.swag_labs import SwagLabs
+from pytest import fixture
 
 
-@fixture(scope='function')
-def driver(browser):
+@fixture(scope='function', params=['chrome', 'firefox', 'edge'])
+def driver(request):
+    browser = request.param
     driver = WebBrowser(browser)
     yield driver
     driver.quit_driver()
@@ -36,11 +38,6 @@ def pytest_addoption(parser):
 @fixture(scope='session')
 def env(request):
     return request.config.getoption("--env")
-
-
-@fixture(scope="session")
-def browser(request):
-    return request.config.getoption("--browser")
 
 
 @fixture(scope="session")

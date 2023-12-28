@@ -1,36 +1,37 @@
 from selenium import webdriver
-from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.chrome.options import Options as ChromeOptions
 from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
-from selenium.common import NoSuchElementException, ElementNotInteractableException, ElementClickInterceptedException
 from framework.logger import get_logger
 
 logger = get_logger()
 
 
-def _create_driver(browser):
+def _create_driver(browser: str):
     """ returns webdriver """
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
-            options.add_argument('--no-sandbox')
             driver = webdriver.Firefox(options=options)
+
+        case "edge":
+            options = webdriver.EdgeOptions()
+            driver = webdriver.Edge(options=options)
 
         case _:
             options = ChromeOptions()
-            # options.add_argument('--headless')
             options.add_argument('--no-sandbox')
             driver = webdriver.Chrome(options=options)
+    logger.info(f'Creating driver of {browser} type')
     return driver
 
 
 class WebBrowser:
     """ Responsible for all web browser capabilities """
 
-    def __init__(self, browser):
+    def __init__(self, browser: str):
         self.driver = _create_driver(browser)
         self.wait = Wait(self.driver)
 
