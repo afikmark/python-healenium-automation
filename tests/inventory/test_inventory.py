@@ -4,6 +4,9 @@ from pytest import mark
 
 @mark.ui
 def test_inventory_add_to_cart_button(swag_ui, app_config, user):
+    """
+    This test verifies the functionality of add to cart button
+    """
     login_page = swag_ui.login_page
     login(login_page, app_config.user['default'], app_config.user['password'])
     inventory_page = swag_ui.inventory_page

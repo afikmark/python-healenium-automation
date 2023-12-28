@@ -4,6 +4,10 @@ from pytest import mark
 @mark.smoke
 @mark.ui
 def test_login(swag_ui, app_config, user):
+    """
+    This test validates the login functionality
+    of the application.
+    """
     login_page = swag_ui.login_page
     login_page.open()
     assert login_page.is_in_page, 'tests if login page is opened'

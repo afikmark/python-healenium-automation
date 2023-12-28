@@ -4,7 +4,9 @@ from web_flows import login
 
 @mark.ui
 def test_remove_item_from_cart(swag_ui, app_config, user):
-    # login
+    """
+    This test validates the flow of removing items from the cart
+    """
     login_page = swag_ui.login_page
     login(login_page, app_config.user['default'], app_config.user['password'])
     inventory_page = swag_ui.inventory_page
