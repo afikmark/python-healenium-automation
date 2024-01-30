@@ -1,5 +1,5 @@
-from web_pages.page import Page
-from framework.ui_elements import TextInput, Button, Locator, By
+from web_pages.swag_labs.page import Page
+from framework.ui_elements import Button, Locator, By
 from framework.logger import get_logger
 from framework.utils import Regex
 

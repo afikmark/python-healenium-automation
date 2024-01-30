@@ -2,7 +2,7 @@ from pytest import mark
 from web_flows import login
 
 
-@mark.ui
+@mark.swag_ui
 def test_remove_item_from_cart(swag_ui, app_config, user):
     """
     This test validates the flow of removing items from the cart

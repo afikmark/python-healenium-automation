@@ -2,7 +2,7 @@ from web_flows import login
 from pytest import mark
 
 
-@mark.ui
+@mark.swag_ui
 def test_inventory_add_to_cart_button(swag_ui, app_config, user):
     """
     This test verifies the functionality of add to cart button

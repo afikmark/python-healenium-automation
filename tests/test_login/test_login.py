@@ -1,8 +1,8 @@
 from pytest import mark
 
 
-@mark.smoke
-@mark.ui
+@mark.swag_smoke
+@mark.swag_ui
 def test_login(swag_ui, app_config, user):
     """
     This test validates the login functionality

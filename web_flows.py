@@ -1,4 +1,4 @@
-from web_pages.login import LoginPage
+from web_pages.swag_labs.login import LoginPage
 
 
 def login(login_page: LoginPage, email, password):

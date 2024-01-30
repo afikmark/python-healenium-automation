@@ -2,7 +2,7 @@ import pytest
 from framework.web_browser import WebBrowser
 from framework.logger import get_logger
 from tests import Config
-from web_pages.swag_labs import SwagLabs
+from web_pages.swag_labs.swag_labs import SwagLabs
 import json
 logger = get_logger()
 
