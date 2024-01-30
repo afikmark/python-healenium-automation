@@ -1,4 +1,4 @@
-from web_flows import login
+from web_pages.swag_labs.web_flows.swag_web_flows import login
 from pytest import mark
 
 

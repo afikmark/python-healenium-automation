@@ -1,5 +1,5 @@
 from pytest import mark
-from web_flows import login
+from web_pages.swag_labs.web_flows.swag_web_flows import login
 
 
 @mark.swag_ui
