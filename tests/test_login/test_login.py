@@ -1,8 +1,8 @@
 from pytest import mark
 
-
 @mark.swag_smoke
 @mark.swag_ui
+@allure.step("test login")
 def test_login(swag_ui, app_config, user):
     """
     This test validates the login functionality
