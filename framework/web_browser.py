@@ -66,13 +66,27 @@ class WebBrowser:
         logger.info(f"finding elements, {locator.__repr__()}")
         return self.driver.find_elements(*locator)
 
-    def click(self, locator: Locator):
+    def click(self, locator: Locator) -> None:
+        """
+        Finds an element using locator
+        waits until element is clickable
+        clicks the element
+        """
         element = self.find_element(locator)
         self.wait.until_clickable(element)
         element.click()
 
-    def get_text(self, locator: Locator):
+    def get_text(self, locator: Locator) -> str:
+        """
+        returns element's text
+        """
         return self.find_element(locator).text
+
+    def get_screenshot_as_png(self):
+        """
+        captures a full screenshot as png format
+        """
+        return self.driver.get_screenshot_as_png()
 
 
 class Wait:
