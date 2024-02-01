@@ -35,6 +35,14 @@ class WebBrowser:
         self.driver = _create_driver(browser)
         self.wait = Wait(self.driver)
 
+    @property
+    def name(self) -> str:
+        return self.driver.name
+
+    @property
+    def capabilities(self) -> dict:
+        return self.driver.capabilities
+
     def quit_driver(self):
         """ Quits the WebDriver """
         if self.driver:
