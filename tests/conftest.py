@@ -30,14 +30,12 @@ def reporter():
 
 
 @pytest.hookimpl(wrapper=True, tryfirst=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item):
     # execute all other hooks to obtain the report object
     rep = yield
-
     # store test results for each phase of a call, which can
     # be "setup", "call", "teardown"
     item.stash.setdefault(phase_report_key, {})[rep.when] = rep
-
     return rep
 
 
