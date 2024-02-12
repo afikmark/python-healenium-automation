@@ -70,6 +70,7 @@ def screenshot_on_failure(request, driver, reporter):
     report = request.node.stash[phase_report_key]
     if report.get("call").failed or report.get("setup").failed:
         screenshot = driver.get_screenshot_as_png()
+        logger.info("Test failed: attaching screenshot.")
         reporter.attach_img(screenshot=screenshot)
 
 
