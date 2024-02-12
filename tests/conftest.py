@@ -75,7 +75,6 @@ def screenshot_on_failure(request, driver, reporter):
 
 
 @pytest.fixture(scope="function")
-@pytest.mark.parametrize("driver", ['chrome'], indirect=True)
 def swag_ui(driver, app_config):
     return SwagLabs(driver, app_config.base_url)
 
