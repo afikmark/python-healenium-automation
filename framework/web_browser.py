@@ -22,7 +22,7 @@ def _create_driver(browser: str, env):
 
 
 def _get_remote_driver(browser: str):
-    """ returns webdriver """
+    """ returns remote webdriver """
     node_url = "http://127.0.0.1:4444"
     match browser:
         case "firefox":
@@ -43,7 +43,7 @@ def _get_remote_driver(browser: str):
 
 
 def _get_local_driver(browser: str):
-    """ returns webdriver """
+    """ returns local webdriver """
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
