@@ -13,12 +13,13 @@ def test_login(swag_ui, app_config, user, reporter):
     login_page.open()
     assert login_page.is_in_page, 'tests if login page is opened'
     reporter.step(name='Step', message='Login to swag labs')
-    login_page.login(app_config.user['default'], app_config.user['password'])
+    login_page.login(app_config.user_name, app_config.user_password)
     inventory_page = swag_ui.inventory_page
     reporter.step(name='Step', message='assert successfully redirected to inventory page after login ')
     assert inventory_page.is_in_page, 'tests if successfully redirected to inventory page'
 
 
+@mark.skip("just for testing failure")
 def test_fail_login(swag_ui, app_config, user, reporter):
     """
     tests example failure with screenshot

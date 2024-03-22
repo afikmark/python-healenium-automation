@@ -8,7 +8,7 @@ def test_remove_item_from_cart(swag_ui, app_config, user):
     This test validates the flow of removing items from the cart
     """
     login_page = swag_ui.login_page
-    login(login_page, app_config.user['default'], app_config.user['password'])
+    login(login_page, app_config.user_name, app_config.user_password)
     inventory_page = swag_ui.inventory_page
     inventory_page.item = inventory_page.inventory_items.BACKPACK
     inventory_page.add_to_cart_btn.click()
