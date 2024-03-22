@@ -15,10 +15,10 @@ phase_report_key = StashKey[Dict[str, CollectReport]]()
 ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 
-# , 'firefox', 'edge'
-@pytest.fixture(scope='function', params=['chrome'])
-def driver(request):
-    browser = request.param
+#
+@pytest.fixture(scope='function')
+def driver(request, browser_type):
+    browser = browser_type
     driver = WebBrowser(browser)
     yield driver
     driver.quit_driver()
@@ -85,7 +85,7 @@ def pytest_addoption(parser):
                      help="Environment to run tests",
                      default="qa"
                      )
-    parser.addoption("--browser",
+    parser.addoption("--browser_type",
                      action="store",
                      help="browser for the automation tests",
                      default="chrome")
@@ -109,6 +109,10 @@ def env(request):
 @pytest.fixture(scope="session")
 def user(request):
     return request.config.getoption("--user")
+
+@pytest.fixture(scope='session')
+def browser_type(request):
+    return request.config.getoption("--browser_type")
 
 
 @pytest.fixture(scope='session')

@@ -14,16 +14,17 @@ def _create_driver(browser: str):
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
-            driver = webdriver.Firefox(options=options)
-
+            # driver = webdriver.Firefox(options=options)
+            driver = webdriver.Remote(options=options)
         case "edge":
             options = webdriver.EdgeOptions()
-            driver = webdriver.Edge(options=options)
-
+            # driver = webdriver.Edge(options=options)
+            driver = webdriver.Remote(options=options)
         case _:
             options = ChromeOptions()
             options.add_argument('--no-sandbox')
-            driver = webdriver.Chrome(options=options)
+            # driver = webdriver.Chrome(options=options)
+            driver = webdriver.Remote(options=options)
     logger.info(f'Creating driver of {browser} type')
     return driver
 
