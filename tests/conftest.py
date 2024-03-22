@@ -17,9 +17,9 @@ ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 #
 @pytest.fixture(scope='function')
-def driver(request, browser_type):
+def driver(request, browser_type, env):
     browser = browser_type
-    driver = WebBrowser(browser)
+    driver = WebBrowser(browser, env)
     yield driver
     driver.quit_driver()
 
@@ -83,7 +83,7 @@ def pytest_addoption(parser):
     parser.addoption("--env",
                      action="store",
                      help="Environment to run tests",
-                     default="qa"
+                     default="local"
                      )
     parser.addoption("--browser_type",
                      action="store",
@@ -94,6 +94,11 @@ def pytest_addoption(parser):
                      action="store",
                      help="user for swag labs",
                      default="standard")
+
+    parser.addoption("--app",
+                     action="store",
+                     help="Application under test",
+                     default="swag_labs")
 
     parser.addoption("--allurdir",
                      action="store",
@@ -110,14 +115,20 @@ def env(request):
 def user(request):
     return request.config.getoption("--user")
 
+
 @pytest.fixture(scope='session')
 def browser_type(request):
     return request.config.getoption("--browser_type")
 
 
 @pytest.fixture(scope='session')
-def app_config(env):
-    cfg = Config(env)
+def app(request):
+    return request.config.getoption("--app")
+
+
+@pytest.fixture(scope='session')
+def app_config(env, app):
+    cfg = Config(env, app)
     return cfg
 
 

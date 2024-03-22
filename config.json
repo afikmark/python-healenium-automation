@@ -1,8 +1,10 @@
 {
   "env": {
-    "dev": "https://www.saucedemo.com/",
-    "qa": "https://www.saucedemo.com/",
-    "prd": "https://saucelabs.com/"
+    "local": "local",
+    "remote": "remote"
+  },
+  "app_url": {
+    "swag_labs": "https://www.saucedemo.com/"
   },
   "user_info": {
     "default_name": "standard_user",
