@@ -10,6 +10,7 @@
   },
   "browser": {
     "chrome": "chrome",
-    "firefox": "firefox"
+    "firefox": "firefox",
+    "edge": "edge"
   }
 }
