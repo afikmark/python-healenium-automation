@@ -9,32 +9,63 @@ from framework.logger import get_logger
 logger = get_logger()
 
 
-def _create_driver(browser: str):
+def _create_driver(browser: str, env):
     """ returns webdriver """
+    match env:
+        case "remote":
+            driver = _get_remote_driver(browser)
+        case "local":
+            driver = _get_local_driver(browser)
+        case _:
+            raise ValueError(f"Unexpected value {env}")
+    return driver
+
+
+def _get_remote_driver(browser: str):
+    """ returns remote webdriver """
     node_url = "http://127.0.0.1:4444"
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
-            # driver = webdriver.Firefox(options=options)
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case "edge":
             options = webdriver.EdgeOptions()
-            # driver = webdriver.Edge(options=options)
             driver = webdriver.Remote(command_executor=node_url, options=options)
-        case _:
+        case "chrome":
             options = ChromeOptions()
             options.add_argument('--no-sandbox')
-            # driver = webdriver.Chrome(options=options)
             driver = webdriver.Remote(command_executor=node_url, options=options)
-    logger.info(f'Creating driver of {browser} type')
+        case _:
+            raise ValueError(f"Unexpected value {browser}")
+
+    logger.info(f'Creating remote driver of {browser} type')
+    return driver
+
+
+def _get_local_driver(browser: str):
+    """ returns local webdriver """
+    match browser:
+        case "firefox":
+            options = webdriver.FirefoxOptions()
+            driver = webdriver.Firefox(options=options)
+        case "edge":
+            options = webdriver.EdgeOptions()
+            driver = webdriver.Edge(options=options)
+        case "chrome":
+            options = ChromeOptions()
+            options.add_argument('--no-sandbox')
+            driver = webdriver.Chrome(options=options)
+        case _:
+            raise ValueError(f"Unexpected value {browser}")
+    logger.info(f'Creating local driver of {browser} type')
     return driver
 
 
 class WebBrowser:
     """ Responsible for all web browser capabilities """
 
-    def __init__(self, browser: str):
-        self.driver = _create_driver(browser)
+    def __init__(self, browser: str, env: str):
+        self.driver = _create_driver(browser, env)
         self.wait = Wait(self.driver)
 
     @property
