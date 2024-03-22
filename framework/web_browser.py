@@ -11,20 +11,23 @@ logger = get_logger()
 
 def _create_driver(browser: str):
     """ returns webdriver """
+    node_url = "http://127.0.0.1:4444"
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
             # driver = webdriver.Firefox(options=options)
-            driver = webdriver.Remote(options=options)
+            node_url = "http://127.0.0.1:4445"
+            driver = webdriver.Remote(command_executor=node_url, options=options)
         case "edge":
+            node_url = "http://127.0.0.1:4446"
             options = webdriver.EdgeOptions()
             # driver = webdriver.Edge(options=options)
-            driver = webdriver.Remote(options=options)
+            driver = webdriver.Remote(command_executor=node_url, options=options)
         case _:
             options = ChromeOptions()
             options.add_argument('--no-sandbox')
             # driver = webdriver.Chrome(options=options)
-            driver = webdriver.Remote(options=options)
+            driver = webdriver.Remote(command_executor=node_url, options=options)
     logger.info(f'Creating driver of {browser} type')
     return driver
 
