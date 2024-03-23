@@ -23,19 +23,22 @@ def _create_driver(browser: str, env):
 
 def _get_remote_driver(browser: str):
     """ returns remote webdriver """
-    node_url = "http://127.0.0.1:4444"
+    node_url = "http://127.0.0.1:4444/wd/hub"
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
-            options.set_capability(name="se:recordVideo", value=True)
+            options.set_capability("moz:firefoxOptions", {"prefs": {"media.navigator.streams.fake": True}})
+            options.set_capability("moz:firefoxOptions", {"args": ["--vnc"]})
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case "edge":
             options = webdriver.EdgeOptions()
-            options.set_capability(name="se:recordVideo", value=True)
+            options.set_capability("ms:edgeOptions", {"enableVideo": True})
+            options.set_capability("ms:edgeOptions", {"vnc": True})
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case "chrome":
             options = ChromeOptions()
-            options.set_capability(name="se:recordVideo", value=True)
+            options.add_argument("enableVNC")
+            options.add_argument("--enableVideo")
             options.add_argument('--no-sandbox')
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case _:
