@@ -17,14 +17,6 @@ phase_report_key = StashKey[Dict[str, CollectReport]]()
 ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 
-@pytest.fixture(scope="session", autouse=True)
-def docker_manager(request):
-    docker_manager = DockerManager()
-    docker_manager.action_docker("START")
-    yield docker_manager
-    docker_manager.action_docker("STOP")
-
-
 @pytest.fixture(scope='function')
 def driver(request, browser_type, env):
     browser = browser_type
