@@ -1,3 +1,5 @@
+import time
+
 from pytest import mark
 
 

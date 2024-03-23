@@ -27,12 +27,15 @@ def _get_remote_driver(browser: str):
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
+            options.set_capability(name="se:recordVideo", value=True)
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case "edge":
             options = webdriver.EdgeOptions()
+            options.set_capability(name="se:recordVideo", value=True)
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case "chrome":
             options = ChromeOptions()
+            options.set_capability(name="se:recordVideo", value=True)
             options.add_argument('--no-sandbox')
             driver = webdriver.Remote(command_executor=node_url, options=options)
         case _:
