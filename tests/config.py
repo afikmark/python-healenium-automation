@@ -14,3 +14,5 @@ class Config:
         self.user_password = configs['user_info']["default_password"]
         self.browser_type = configs['browser'][browser_type]
         self.env = configs['env'][env]
+        self.selenoid_options = configs['selenoid_options']
+        self.node_url = configs['node_url']
