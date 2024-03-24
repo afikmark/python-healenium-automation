@@ -8,7 +8,7 @@ logger = get_logger()
 
 class SelenoidManager:
     ROOT_DIR = Path(__file__).resolve().parent.parent
-    CONFIGURATION_MANAGER_SELENOID = ROOT_DIR / "cm.exe"
+    CONFIGURATION_MANAGER_SELENOID = ROOT_DIR / "cm.exe"  # todo: add command to download selenoid configuration manager
 
     def action_selenoid(self, action: str):
         match action:
