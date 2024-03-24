@@ -14,5 +14,10 @@
     "chrome": "chrome",
     "firefox": "firefox",
     "edge": "edge"
-  }
+  },
+  "selenoid_options": {
+    "enableVideo": true,
+    "enableVNC": true
+  },
+  "node_url": "http://localhost:4444/wd/hub"
 }

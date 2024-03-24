@@ -1,6 +1,4 @@
 import pytest
-
-from framework.docker_manager import DockerManager
 from framework.web_browser import WebBrowser
 from framework.logger import get_logger
 from settings import ROOT_DIR
@@ -10,6 +8,7 @@ import json
 from typing import Dict
 from framework.reporter import AllureReporter
 from pytest import StashKey, CollectReport
+from framework.selenoid_manager import SelenoidManager
 
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
@@ -17,10 +16,24 @@ phase_report_key = StashKey[Dict[str, CollectReport]]()
 ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 
+@pytest.hookimpl
+def pytest_sessionstart(session):
+    print("Test session is starting")
+    sm = SelenoidManager()
+    sm.action_selenoid("START")
+
+
+@pytest.hookimpl
+def pytest_sessionfinish(session):
+    print("Test session is starting")
+    sm = SelenoidManager()
+    sm.action_selenoid("STOP")
+
+
 @pytest.fixture(scope='function')
-def driver(request, browser_type, env):
+def driver(request, browser_type, env, node_url, selenoid_options):
     browser = browser_type
-    driver = WebBrowser(browser, env)
+    driver = WebBrowser(browser, env, node_url, selenoid_options)
     yield driver
     driver.quit_driver()
 
@@ -131,6 +144,16 @@ def app(request):
 def app_config(env, app):
     cfg = Config(env, app)
     return cfg
+
+
+@pytest.fixture(scope='session')
+def node_url(app_config):
+    return app_config.node_url
+
+
+@pytest.fixture(scope='session')
+def selenoid_options(app_config):
+    return app_config.selenoid_options
 
 
 def pytest_collection_modifyitems(items):

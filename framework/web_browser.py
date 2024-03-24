@@ -5,15 +5,16 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
 from framework.logger import get_logger
+from typing import Dict
 
 logger = get_logger()
 
 
-def _create_driver(browser: str, env):
+def _create_driver(browser: str, env, node_url=None, selenoid_options=None):
     """ returns webdriver """
     match env:
         case "remote":
-            driver = _get_remote_driver(browser)
+            driver = _get_remote_driver(browser, node_url, selenoid_options)
         case "local":
             driver = _get_local_driver(browser)
         case _:
@@ -21,13 +22,13 @@ def _create_driver(browser: str, env):
     return driver
 
 
-def _get_remote_driver(browser: str):
+def _get_remote_driver(browser: str, node_url, selenoid_options):
     """ returns remote webdriver """
-    node_url = "http://localhost:4444/wd/hub"
-    selenoid_options = {
-        "enableVideo": True,
-        "enableVNC": True
-    }
+    # node_url = "http://localhost:4444/wd/hub"
+    # selenoid_options = {
+    #     "enableVideo": True,
+    #     "enableVNC": True
+    # }
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
@@ -71,8 +72,8 @@ def _get_local_driver(browser: str):
 class WebBrowser:
     """ Responsible for all web browser capabilities """
 
-    def __init__(self, browser: str, env: str):
-        self.driver = _create_driver(browser, env)
+    def __init__(self, browser: str, env: str, node_url: str, selenoid_options: Dict["str", bool]):
+        self.driver = _create_driver(browser, env, node_url, selenoid_options)
         self.wait = Wait(self.driver)
 
     @property
