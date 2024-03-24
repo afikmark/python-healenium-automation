@@ -14,7 +14,6 @@ class SelenoidManager:
         match action:
             case "START":
                 subprocess.run([self.CONFIGURATION_MANAGER_SELENOID, "selenoid", "start", "--vnc"], check=True)
-                time.sleep(5)
                 subprocess.run([self.CONFIGURATION_MANAGER_SELENOID, "selenoid-ui", "start"], check=True)
                 logger.info("Selenoid is up")
             case "STOP":
