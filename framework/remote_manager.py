@@ -33,7 +33,7 @@ class RemoteRunner:
                 time.sleep(5) # todo: replace sleep with wait
                 logger.info("Healenium is up")
             case "STOP":
-                subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "down"], check=True)
+                subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "stop"], check=True)
                 time.sleep(5) # todo: replace sleep with wait
                 logger.info("Healenium is down")
             case _:

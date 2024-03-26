@@ -39,12 +39,12 @@ def pytest_sessionfinish(session):
         sm.action_healenium("STOP")
 
 
-@pytest.fixture(scope='session')
-def driver(request, browser_type, selenoid_options, remote_url):
+@pytest.fixture(scope='function')
+def driver(browser_type, selenoid_options, remote_url):
     browser = browser_type
     driver = WebBrowser(browser, remote_url, selenoid_options)
     yield driver
-    # driver.quit_driver()
+    driver.quit_driver()
 
 
 @pytest.fixture
@@ -62,7 +62,7 @@ def pytest_runtest_makereport(item):
     return rep
 
 
-@pytest.fixture(autouse=True)
+@pytest.fixture(autouse=False)
 def test_details(driver) -> dict:
     """
     retrieve current driver information

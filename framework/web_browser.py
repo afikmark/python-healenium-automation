@@ -1,4 +1,5 @@
 from selenium import webdriver
+from selenium.webdriver import DesiredCapabilities
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.chrome.options import Options as ChromeOptions
@@ -33,6 +34,7 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
         case "chrome":
             options = ChromeOptions()
             options.set_capability("selenoid:options", selenoid_options)
+
             options.add_argument('--no-sandbox')
             driver = webdriver.Remote(command_executor=remote_url, options=options)
         case _:
