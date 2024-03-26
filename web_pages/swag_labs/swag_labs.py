@@ -1,7 +1,7 @@
 from .login import LoginPage
 from .inventory import InventoryPage
 from .cart import CartPage
-from .page import Page
+from web_pages.page import Page
 
 
 class SwagLabs(Page):

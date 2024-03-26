@@ -3,12 +3,15 @@ from framework.web_browser import WebBrowser
 from framework.logger import get_logger
 from settings import ROOT_DIR
 from tests import Config
+from tests.config import RemoteMode
+from web_pages.healenium_demo.healenium_demo import HealeniumDemo
 from web_pages.swag_labs.swag_labs import SwagLabs
 import json
 from typing import Dict
 from framework.reporter import AllureReporter
 from pytest import StashKey, CollectReport
-from framework.selenoid_manager import SelenoidManager
+
+from framework.selenoid_manager import RemoteRunner
 
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
@@ -18,22 +21,28 @@ ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 @pytest.hookimpl
 def pytest_sessionstart(session):
-    print("Test session is starting")
-    sm = SelenoidManager()
-    sm.action_selenoid("START")
+    sm = RemoteRunner()
+    remote_mode = session.config.getoption("--remote_mode")
+    if remote_mode == "selenoid":
+        sm.action_selenoid("START")
+    else:
+        sm.action_healenium("START")
 
 
 @pytest.hookimpl
 def pytest_sessionfinish(session):
-    print("Test session is starting")
-    sm = SelenoidManager()
-    sm.action_selenoid("STOP")
+    sm = RemoteRunner()
+    remote_mode = session.config.getoption("--remote_mode")
+    if remote_mode == "selenoid":
+        sm.action_selenoid("STOP")
+    else:
+        sm.action_healenium("STOP")
 
 
 @pytest.fixture(scope='function')
-def driver(request, browser_type, env, node_url, selenoid_options):
+def driver(request, browser_type, selenoid_options, remote_url):
     browser = browser_type
-    driver = WebBrowser(browser, env, node_url, selenoid_options)
+    driver = WebBrowser(browser, remote_url, selenoid_options)
     yield driver
     driver.quit_driver()
 
@@ -90,39 +99,22 @@ def screenshot_on_failure(request, driver, reporter):
 
 @pytest.fixture(scope="function")
 def swag_ui(driver, app_config):
-    return SwagLabs(driver, app_config.base_url)
+    return SwagLabs(driver, app_config.app_url)
+
+
+@pytest.fixture(scope="function")
+def healenium_ui(driver, app_config):
+    return HealeniumDemo(driver, app_config.app_url)
 
 
 def pytest_addoption(parser):
-    parser.addoption("--env",
-                     action="store",
-                     help="Environment to run tests",
-                     default="local"
-                     )
-    parser.addoption("--browser_type",
-                     action="store",
-                     help="browser for the automation tests",
-                     default="chrome")
-
-    parser.addoption("--user",
-                     action="store",
-                     help="user for swag labs",
-                     default="standard")
-
-    parser.addoption("--app",
-                     action="store",
-                     help="Application under test",
-                     default="swag_labs")
-
-    parser.addoption("--allurdir",
-                     action="store",
-                     help="allure results directory",
-                     default="allure-results")
-
-
-@pytest.fixture(scope='session')
-def env(request):
-    return request.config.getoption("--env")
+    parser.addoption("--browser_type", action="store", help="browser for the automation tests", default="chrome")
+    parser.addoption("--user", action="store", help="user for swag labs", default="standard")
+    parser.addoption("--app", action="store", help="Application under test", default="swag_labs")
+    parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=False)
+    parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
+    parser.addoption("--remote_mode", action="store", help="run selenoid directly or from healenium",
+                     default=RemoteMode.HEALENIUM)
 
 
 @pytest.fixture(scope="session")
@@ -141,19 +133,33 @@ def app(request):
 
 
 @pytest.fixture(scope='session')
-def app_config(env, app):
-    cfg = Config(env, app)
-    return cfg
+def is_local(request):
+    return request.config.getoption('--is_local')
 
 
 @pytest.fixture(scope='session')
-def node_url(app_config):
-    return app_config.node_url
+def remote_mode(request):
+    return request.config.getoption('--remote_mode')
 
 
 @pytest.fixture(scope='session')
 def selenoid_options(app_config):
     return app_config.selenoid_options
+
+
+@pytest.fixture(scope="session")
+def remote_url(app_config):
+    return app_config.remote_url
+
+
+@pytest.fixture(scope='session')
+def app_config(is_local, app, browser_type, remote_mode):
+    cfg = Config(is_local=is_local,
+                 app=app,
+                 browser_type=browser_type,
+                 remote_mode=remote_mode
+                 )
+    return cfg
 
 
 def pytest_collection_modifyitems(items):

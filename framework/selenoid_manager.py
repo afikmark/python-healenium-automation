@@ -6,9 +6,10 @@ from framework.logger import get_logger
 logger = get_logger()
 
 
-class SelenoidManager:
+class RemoteRunner:
     ROOT_DIR = Path(__file__).resolve().parent.parent
     CONFIGURATION_MANAGER_SELENOID = ROOT_DIR / "cm.exe"  # todo: add command to download selenoid configuration manager
+    HEALENIUM_DOCKER_COMPOSE = ROOT_DIR / "framework" / "healenium" / "docker-compose-selenoid.yaml"
 
     def action_selenoid(self, action: str):
         match action:
@@ -21,6 +22,20 @@ class SelenoidManager:
                 subprocess.run([self.CONFIGURATION_MANAGER_SELENOID, "selenoid-ui", "stop"], check=True)
                 self.stop_all_containers()
                 logger.info("Selenoid is down")
+            case _:
+                raise RuntimeError("Provide either START or STOP for running docker")
+
+    def action_healenium(self, action: str):
+
+        match action:
+            case "START":
+                subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "up", "-d"], check=True)
+                time.sleep(5) # todo: replace sleep with wait
+                logger.info("Healenium is up")
+            case "STOP":
+                subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "down"], check=True)
+                time.sleep(5) # todo: replace sleep with wait
+                logger.info("Healenium is down")
             case _:
                 raise RuntimeError("Provide either START or STOP for running docker")
 
