@@ -10,39 +10,31 @@ from typing import Dict
 logger = get_logger()
 
 
-def _create_driver(browser: str, env, node_url=None, selenoid_options=None):
+def _create_driver(browser: str, remote_url=None, selenoid_options=None):
     """ returns webdriver """
-    match env:
-        case "remote":
-            driver = _get_remote_driver(browser, node_url, selenoid_options)
-        case "local":
-            driver = _get_local_driver(browser)
-        case _:
-            raise ValueError(f"Unexpected value {env}")
+    if remote_url is None:
+        driver = _get_local_driver(browser)
+    else:
+        driver = _get_remote_driver(browser, remote_url, selenoid_options)
     return driver
 
 
-def _get_remote_driver(browser: str, node_url, selenoid_options):
+def _get_remote_driver(browser: str, remote_url, selenoid_options):
     """ returns remote webdriver """
-    # node_url = "http://localhost:4444/wd/hub"
-    # selenoid_options = {
-    #     "enableVideo": True,
-    #     "enableVNC": True
-    # }
     match browser:
         case "firefox":
             options = webdriver.FirefoxOptions()
             options.set_capability("selenoid:options", selenoid_options)
-            driver = webdriver.Remote(command_executor=node_url, options=options)
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
         case "edge":
             options = webdriver.EdgeOptions()
             options.set_capability("selenoid:options", selenoid_options)
-            driver = webdriver.Remote(command_executor=node_url, options=options)
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
         case "chrome":
             options = ChromeOptions()
             options.set_capability("selenoid:options", selenoid_options)
             options.add_argument('--no-sandbox')
-            driver = webdriver.Remote(command_executor=node_url, options=options)
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
         case _:
             raise ValueError(f"Unexpected value {browser}")
 
@@ -72,8 +64,8 @@ def _get_local_driver(browser: str):
 class WebBrowser:
     """ Responsible for all web browser capabilities """
 
-    def __init__(self, browser: str, env: str, node_url: str, selenoid_options: Dict["str", bool]):
-        self.driver = _create_driver(browser, env, node_url, selenoid_options)
+    def __init__(self, browser: str, remote_url: str, selenoid_options: Dict["str", bool]):
+        self.driver = _create_driver(browser, remote_url, selenoid_options)
         self.wait = Wait(self.driver)
 
     @property

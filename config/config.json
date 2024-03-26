@@ -1,23 +1,29 @@
 {
   "env": {
-    "local": "local",
-    "remote": "remote"
+    "local": {
+      "is_local": true
+    },
+    "remote": {
+      "is_local": false,
+      "selenoid_url": "http://localhost:4444/wd/hub",
+      "healenium_url": "http://localhost:8085",
+      "selenoid_options": {
+        "enableVideo": true,
+        "enableVNC": true
+      }
+    }
   },
-  "app_url": {
-    "swag_labs": "https://www.saucedemo.com/"
+  "app_urls": {
+    "swag_labs": "https://www.saucedemo.com/",
+    "healenium": "https://atidcollege.co.il/Xamples/healenium/"
   },
   "user_info": {
     "default_name": "standard_user",
     "default_password": "secret_sauce"
   },
-  "browser": {
+  "browsers": {
     "chrome": "chrome",
     "firefox": "firefox",
     "edge": "edge"
-  },
-  "selenoid_options": {
-    "enableVideo": true,
-    "enableVNC": true
-  },
-  "node_url": "http://localhost:4444/wd/hub"
+  }
 }

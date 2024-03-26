@@ -1,4 +1,4 @@
-from web_pages.swag_labs.page import Page
+from web_pages.page import Page
 from framework.ui_elements import Locator, By
 
 
