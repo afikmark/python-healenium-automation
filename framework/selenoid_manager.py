@@ -2,6 +2,7 @@ import time
 import subprocess
 from pathlib import Path
 from framework.logger import get_logger
+from framework.utils import retry_on_false
 
 logger = get_logger()
 
@@ -30,14 +31,19 @@ class RemoteRunner:
         match action:
             case "START":
                 subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "up", "-d"], check=True)
-                time.sleep(5) # todo: replace sleep with wait
+                time.sleep(5)  # todo: replace sleep with wait
                 logger.info("Healenium is up")
             case "STOP":
                 subprocess.run(["docker-compose", "-f", self.HEALENIUM_DOCKER_COMPOSE, "down"], check=True)
-                time.sleep(5) # todo: replace sleep with wait
+                self.wait_until_containers_are_down()
+                # time.sleep(5)  # todo: replace sleep with wait
                 logger.info("Healenium is down")
             case _:
                 raise RuntimeError("Provide either START or STOP for running docker")
+
+    @retry_on_false
+    def wait_until_containers_are_down(self) -> bool:
+        return True if self.get_running_containers_ids() else False
 
     def stop_all_containers(self):
         running_containers = self.get_running_containers_ids()
