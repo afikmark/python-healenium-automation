@@ -1,3 +1,4 @@
 /.ptest_cache
 /__pycache__
 /.idea
+/tests/allure-results/
