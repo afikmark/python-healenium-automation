@@ -20,7 +20,7 @@ class Config:
         self.user_name = config_data['user_info']['default_name']
         self.user_password = config_data['user_info']['default_password']
         self.browser_type = config_data['browsers'][browser_type]
-        if not is_local:
+        if not self.is_local:
             self.remote_url = self.env_config[
                 'healenium_url' if remote_mode == RemoteMode.HEALENIUM else 'selenoid_url']
             self.selenoid_options = self.env_config['selenoid_options']
