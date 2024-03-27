@@ -1,0 +1,40 @@
+name: Nightly regression tests
+
+on:
+  schedule:
+    - cron: "0 0 * * *"
+jobs:
+  nightly:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Starting selenoid server
+        uses: ajinx/selenoid@2.0
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.12
+      - name: Install dependencies
+        run:
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+      - name: Install plugin
+        run: pip install pytest-github-actions-annotate-failures
+      - name: test with pytest
+        run: pytest -s -v --app swag_labs
+      - name: Allure results
+        uses: simple-elf/allure-report-action@master
+        if: always()
+        id: allure-report
+        with:
+          allure_results: allure-results
+          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history
