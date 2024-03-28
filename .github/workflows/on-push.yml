@@ -11,6 +11,9 @@ jobs:
       - name: List contents of the directory
         run: ls -la framework/healenium
 
+      - name: Check Docker containers status
+        run: docker ps -a
+
       - name: Start Docker Compose Selenoid
         run: docker-compose -f framework/healenium/docker-compose-selenoid.yaml up -d
 
@@ -30,7 +33,7 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
 
       - name: test with pytest
-        run: pytest -s -v --app swag_labs
+        run: pytest -s -v
 
       - name: Allure results
         uses: simple-elf/allure-report-action@master

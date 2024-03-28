@@ -20,7 +20,7 @@ def _create_driver(browser: str, remote_url=None, selenoid_options=None):
     return driver
 
 
-def _get_remote_driver(browser: str, remote_url, selenoid_options) -> webdriver:
+def _get_remote_driver(browser: str, remote_url, selenoid_options):
     """ returns remote webdriver """
     logger.info(
         f"creating remote driver with {browser} browser type, url: {remote_url},selenoid_options: {selenoid_options}")
