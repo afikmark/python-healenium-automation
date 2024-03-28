@@ -27,7 +27,7 @@ jobs:
         run: pytest --collect-only
 
       - name: test with pytest
-        run: pytest -s -v --is_local True
+        run: pytest -s -v --is_local True --browser_type firefox
 
       - name: Allure results
         uses: simple-elf/allure-report-action@master
