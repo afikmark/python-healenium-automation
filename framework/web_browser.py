@@ -20,7 +20,7 @@ def _create_driver(browser: str, remote_url=None, selenoid_options=None):
     return driver
 
 
-def _get_remote_driver(browser: str, remote_url, selenoid_options):
+def _get_remote_driver(browser: str, remote_url, selenoid_options) -> webdriver:
     """ returns remote webdriver """
     logger.info(
         f"creating remote driver with {browser} browser type, url: {remote_url},selenoid_options: {selenoid_options}")
@@ -43,6 +43,8 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
                 raise ValueError(f"Unexpected value {browser}")
         logger.info(f'Creating remote driver of {browser} type')
         logger.info(f'Driver: {driver}')
+        if driver is None:
+            raise TypeError("Driver is None")
         return driver
     except Exception as e:
         logger.error(f"failed to create driver {e}")
