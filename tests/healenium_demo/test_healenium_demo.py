@@ -1,3 +1,7 @@
+import pytest
+
+
+@pytest.mark.skip("skip when not using healenium")
 def test_login_healenium(healenium_ui):
     healenium_ui.open()
     login_page = healenium_ui.login_page
