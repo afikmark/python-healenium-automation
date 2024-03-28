@@ -10,7 +10,7 @@ jobs:
         uses: Xotabu4/selenoid-github-action@v2
       - uses: actions/checkout@v1
       - name: Set up Python 3.12
-        uses: actions/setup-python@v2
+        uses: actions/setup-python@v5
         with:
           python-version: 3.12
       - name: Install dependencies
@@ -20,7 +20,7 @@ jobs:
       - name: Install plugin
         run: pip install pytest-github-actions-annotate-failures
       - name: test with pytest
-        run: pytest -s -v --app swag_labs --remote_mode selenoid
+        run: pytest -s -v --app swag_labs
       - name: Allure results
         uses: simple-elf/allure-report-action@master
         if: always()
@@ -33,5 +33,6 @@ jobs:
       - name: Deploy report to Github Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./public
+            PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+            PUBLISH_BRANCH: gh-pages
+            PUBLISH_DIR: allure-history
