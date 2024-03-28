@@ -14,8 +14,7 @@
     }
   },
   "app_urls": {
-    "swag_labs": "https://www.saucedemo.com/",
-    "healenium": "https://atidcollege.co.il/Xamples/healenium/"
+    "swag_labs": "https://www.saucedemo.com/"
   },
   "user_info": {
     "default_name": "standard_user",

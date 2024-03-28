@@ -37,7 +37,6 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
             driver = webdriver.Remote(command_executor=remote_url, options=options)
         case _:
             raise ValueError(f"Unexpected value {browser}")
-
     logger.info(f'Creating remote driver of {browser} type')
     return driver
 
