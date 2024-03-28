@@ -7,8 +7,8 @@
                 "port": "4444",
                 "path": "/"
             },
-            "122.0": {
-                "image": "selenoid/chrome:122.0",
+            "latest": {
+                "image": "selenoid/chrome:latest",
                 "port": "4444",
                 "path": "/"
             }
