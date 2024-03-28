@@ -1,12 +1,13 @@
 name: On push regression tests
 
-on: [ push ]
+on: [push]
 
 jobs:
   nightly:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
       - name: List contents of the directory
         run: ls -la framework/healenium
@@ -17,10 +18,11 @@ jobs:
       - name: Check Docker containers status
         run: docker ps -a
 
-      - uses: actions/checkout@v1
+      - name: Checkout again
+        uses: actions/checkout@v1
 
       - name: Set up Python 3.12
-        uses: actions/setup-python@v5
+        uses: actions/setup-python@v2
         with:
           python-version: 3.12
 
@@ -29,26 +31,25 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Install plugin
+      - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
       - name: Collect only before tests
         run: pytest --collect-only
 
-      - name: test with pytest
+      - name: Run pytest tests
         run: pytest -s -v
 
-      - name: Allure results
+      - name: Generate Allure results
         uses: simple-elf/allure-report-action@master
         if: always()
-        id: allure-report
         with:
           allure_results: allure-results
           allure_report: allure-report
           gh_pages: gh-pages
           allure_history: allure-history
 
-      - name: Deploy report to Github Pages
+      - name: Deploy report to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
