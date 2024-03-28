@@ -72,7 +72,8 @@ def _get_local_driver(browser: str):
 class WebBrowser:
     """ Responsible for all web browser capabilities """
 
-    def __init__(self, browser: str, remote_url: str, selenoid_options: Dict["str", bool]):
+    def __init__(self, browser: str, remote_url: str, selenoid_options: Dict[str, bool]):
+        logger.info(f"Calling {_create_driver} with browser: {browser}, remote_url: {remote_url}, selenoid_options: {selenoid_options}")
         self.driver = _create_driver(browser, remote_url, selenoid_options)
         self.wait = Wait(self.driver)
 
