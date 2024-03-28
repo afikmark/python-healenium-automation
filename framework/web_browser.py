@@ -37,6 +37,7 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
                 options = ChromeOptions()
                 options.set_capability("selenoid:options", selenoid_options)
                 options.add_argument('--no-sandbox')
+                options.add_argument('--headless')
                 options.add_argument("--disable-setuid-sandbox")
                 options.add_argument('--disable-dev-shm-usage')
                 options.add_argument("--remote-debugging-port=9222 ")
