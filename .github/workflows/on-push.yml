@@ -9,11 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: List contents of the directory
-        run: ls -la framework/healenium
-
-      - name: Start Docker Compose Selenoid
-        run: docker-compose -f framework/healenium/docker-compose-selenoid.yaml up -d
+      - name: Start Selenoid Server
+        uses: Xotabu4/selenoid-github-action@v2
 
       - name: Check Docker containers status
         run: docker ps -a
@@ -38,7 +35,7 @@ jobs:
         run: pytest --collect-only
 
       - name: Run pytest tests
-        run: pytest -s -v
+        run: pytest -s -v --remote_mode selenoid
 
       - name: Generate Allure results
         uses: simple-elf/allure-report-action@master
