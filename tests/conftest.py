@@ -20,9 +20,12 @@ ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 @pytest.fixture(scope='function')
 def driver(request, browser_type, selenoid_options, remote_url):
     browser = browser_type
-    driver = WebBrowser(browser, remote_url, selenoid_options)
-    yield driver
-    driver.quit_driver()
+    try:
+        driver = WebBrowser(browser, remote_url, selenoid_options)
+        yield driver
+        driver.quit_driver()
+    except Exception as e:
+        logger.error(e)
 
 
 @pytest.fixture
