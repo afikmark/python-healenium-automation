@@ -25,6 +25,8 @@ jobs:
           wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
           sudo dpkg -i google-chrome-stable_current_amd64.deb
           sudo apt-get -f install -y
+        env:
+          CHROME_DEVEL_SANDBOX: /usr/local/sbin/chrome-devel-sandbox
 
       - name: Install plugin
         run: pip install pytest-github-actions-annotate-failures
