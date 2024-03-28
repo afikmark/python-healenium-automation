@@ -1,14 +1,14 @@
 {
     "chrome": {
-        "default": "122.0",
+        "default": "123.0",
         "versions": {
             "121.0": {
                 "image": "selenoid/chrome:121.0",
                 "port": "4444",
                 "path": "/"
             },
-            "latest": {
-                "image": "selenoid/chrome:latest",
+            "123.0": {
+                "image": "selenoid/chrome:123.0",
                 "port": "4444",
                 "path": "/"
             }
