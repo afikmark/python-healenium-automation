@@ -31,9 +31,13 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
             options.set_capability("selenoid:options", selenoid_options)
             driver = webdriver.Remote(command_executor=remote_url, options=options)
         case "chrome":
+            logger.info("Creating Chrome options")
             options = ChromeOptions()
+            logger.info("Set capability")
             options.set_capability("selenoid:options", selenoid_options)
+            logger.info("add arguments")
             options.add_argument('--no-sandbox')
+            logger.info(f"Creating remote chrome driver using url: {remote_url} and options: {options} ")
             driver = webdriver.Remote(command_executor=remote_url, options=options)
         case _:
             raise ValueError(f"Unexpected value {browser}")
