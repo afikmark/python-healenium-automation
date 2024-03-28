@@ -6,6 +6,7 @@ from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
 from framework.logger import get_logger
 from typing import Dict
+from _pytest.fixtures import FixtureRequest
 
 logger = get_logger()
 
@@ -21,25 +22,30 @@ def _create_driver(browser: str, remote_url=None, selenoid_options=None):
 
 def _get_remote_driver(browser: str, remote_url, selenoid_options):
     """ returns remote webdriver """
-    match browser:
-        case "firefox":
-            options = webdriver.FirefoxOptions()
-            options.set_capability("selenoid:options", selenoid_options)
-            driver = webdriver.Remote(command_executor=remote_url, options=options)
-        case "edge":
-            options = webdriver.EdgeOptions()
-            options.set_capability("selenoid:options", selenoid_options)
-            driver = webdriver.Remote(command_executor=remote_url, options=options)
-        case "chrome":
-            options = ChromeOptions()
-            options.set_capability("selenoid:options", selenoid_options)
-            options.add_argument('--no-sandbox')
-            driver = webdriver.Remote(command_executor=remote_url, options=options)
-        case _:
-            raise ValueError(f"Unexpected value {browser}")
-    logger.info(f'Creating remote driver of {browser} type')
-    logger.info(f'Driver: {driver}')
-    return driver
+    logger.info(
+        f"creating remote driver with {browser} browser type, url: {remote_url},selenoid_options: {selenoid_options}")
+    try:
+        match browser:
+            case "firefox":
+                options = webdriver.FirefoxOptions()
+                options.set_capability("selenoid:options", selenoid_options)
+                driver = webdriver.Remote(command_executor=remote_url, options=options)
+            case "edge":
+                options = webdriver.EdgeOptions()
+                options.set_capability("selenoid:options", selenoid_options)
+                driver = webdriver.Remote(command_executor=remote_url, options=options)
+            case "chrome":
+                options = ChromeOptions()
+                options.set_capability("selenoid:options", selenoid_options)
+                options.add_argument('--no-sandbox')
+                driver = webdriver.Remote(command_executor=remote_url, options=options)
+            case _:
+                raise ValueError(f"Unexpected value {browser}")
+        logger.info(f'Creating remote driver of {browser} type')
+        logger.info(f'Driver: {driver}')
+        return driver
+    except Exception as e:
+        logger.error(f"failed to create driver {e}")
 
 
 def _get_local_driver(browser: str):
