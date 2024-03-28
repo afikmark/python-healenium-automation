@@ -9,7 +9,7 @@ jobs:
       - uses: actions/checkout@v4
 
       - name: List contents of the directory
-        run: ls -la /framework/healenium
+        run: ls -la
 
       - name: Start Docker Compose Selenoid
         run: docker-compose -f /framework/healenium/docker-compose-selenoid.yaml up -d
