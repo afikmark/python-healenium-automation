@@ -20,7 +20,7 @@ jobs:
       - name: Install plugin
         run: pip install pytest-github-actions-annotate-failures
       - name: test with pytest
-        run: pytest -s -v --app swag_labs
+        run: pytest /tests/swag_labs -s -v --app swag_labs --remote_mode selenoid
       - name: Allure results
         uses: simple-elf/allure-report-action@master
         if: always()
