@@ -114,7 +114,7 @@ def pytest_addoption(parser):
     parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=False)
     parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
     parser.addoption("--remote_mode", action="store", help="run selenoid directly or from healenium",
-                     default=RemoteMode.HEALENIUM)
+                     default=RemoteMode.SELENOID)
 
 
 @pytest.fixture(scope="session")
@@ -144,7 +144,7 @@ def remote_mode(request):
 
 @pytest.fixture(scope='session')
 def selenoid_options(app_config):
-    return getattr(app_config, "remote_url", None)
+    return getattr(app_config, "selenoid_options", None)
 
 
 @pytest.fixture(scope="session")
