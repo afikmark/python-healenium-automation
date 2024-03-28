@@ -38,6 +38,7 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
         case _:
             raise ValueError(f"Unexpected value {browser}")
     logger.info(f'Creating remote driver of {browser} type')
+    logger.info(f'Driver: {driver}')
     return driver
 
 
