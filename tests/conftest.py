@@ -40,29 +40,29 @@ def pytest_runtest_makereport(item):
     return rep
 
 
-@pytest.fixture(autouse=True)
-def test_details(driver) -> dict:
-    """
-    retrieve current driver information
-    """
-    return {
-        'name': driver.name.capitalize(),
-        'version': driver.capabilities['browserVersion'],
-        'platform': driver.capabilities['platformName'].capitalize()
-    }
-
-
-@pytest.fixture(autouse=True)
-def write_test_details(test_details: dict) -> None:
-    """
-    Get current driver information and writes it to environment properties file in the allure-results path
-    """
-    info = f'\nBrowser={test_details["name"]}\nVersion={test_details["version"]}\nPlatform={test_details["platform"]}'
-    env_properties_path = fr'{ALLURE_RESULTS_PATH}\environment.properties'
-    logger.info(f"path is {env_properties_path}")
-    with open(env_properties_path, 'w') as f:
-        f.write(info)
-    logger.info(f"writing current driver details")
+# @pytest.fixture(autouse=True)
+# def test_details(driver) -> dict:
+#     """
+#     retrieve current driver information
+#     """
+#     return {
+#         'name': driver.name.capitalize(),
+#         'version': driver.capabilities['browserVersion'],
+#         'platform': driver.capabilities['platformName'].capitalize()
+#     }
+#
+#
+# @pytest.fixture(autouse=True)
+# def write_test_details(test_details: dict) -> None:
+#     """
+#     Get current driver information and writes it to environment properties file in the allure-results path
+#     """
+#     info = f'\nBrowser={test_details["name"]}\nVersion={test_details["version"]}\nPlatform={test_details["platform"]}'
+#     env_properties_path = fr'{ALLURE_RESULTS_PATH}\environment.properties'
+#     logger.info(f"path is {env_properties_path}")
+#     with open(env_properties_path, 'w') as f:
+#         f.write(info)
+#     logger.info(f"writing current driver details")
 
 
 @pytest.fixture(autouse=True, scope="function")
