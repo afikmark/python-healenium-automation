@@ -8,6 +8,9 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: List contents of the directory
+        run: ls -la Automation/framework/healenium
+
       - name: Start Docker Compose Selenoid
         run: docker-compose -f Automation/framework/healenium/docker-compose-selenoid.yaml up -d
 
