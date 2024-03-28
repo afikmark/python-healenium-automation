@@ -19,26 +19,6 @@ phase_report_key = StashKey[Dict[str, CollectReport]]()
 ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 
-# @pytest.hookimpl
-# def pytest_sessionstart(session):
-#     sm = RemoteRunner()
-#     remote_mode = session.config.getoption("--remote_mode")
-#     if remote_mode == "selenoid":
-#         sm.action_selenoid("START")
-#     else:
-#         sm.action_healenium("START")
-#
-#
-# @pytest.hookimpl
-# def pytest_sessionfinish(session):
-#     sm = RemoteRunner()
-#     remote_mode = session.config.getoption("--remote_mode")
-#     if remote_mode == "selenoid":
-#         sm.action_selenoid("STOP")
-#     else:
-#         sm.action_healenium("STOP")
-
-
 @pytest.fixture(scope='function')
 def driver(request, browser_type, selenoid_options, remote_url):
     browser = browser_type
