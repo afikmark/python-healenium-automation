@@ -6,7 +6,6 @@ from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
 from framework.logger import get_logger
 from typing import Dict
-from _pytest.fixtures import FixtureRequest
 
 logger = get_logger()
 
@@ -66,6 +65,7 @@ def _get_local_driver(browser: str):
         case _:
             raise ValueError(f"Unexpected value {browser}")
     logger.info(f'Creating local driver of {browser} type')
+    logger.info(f'Driver: {driver}')
     return driver
 
 
