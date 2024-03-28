@@ -11,8 +11,6 @@ from typing import Dict
 from framework.reporter import AllureReporter
 from pytest import StashKey, CollectReport
 
-from framework.remote_manager import RemoteRunner
-
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
 
