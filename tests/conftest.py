@@ -91,8 +91,8 @@ def pytest_addoption(parser):
     parser.addoption("--app", action="store", help="Application under test", default="swag_labs")
     parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=False)
     parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
-    parser.addoption("--remote_mode", action="store", help="run selenoid directly or from healenium",
-                     default=RemoteMode.SELENOID)
+    parser.addoption("--remote_mode", action="store", help="healenium OR selenoid",
+                     default=RemoteMode.HEALENIUM)
 
 
 @pytest.fixture(scope="session")
