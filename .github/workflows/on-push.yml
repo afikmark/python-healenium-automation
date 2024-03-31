@@ -38,7 +38,7 @@ jobs:
         run: pytest --collect-only
 
       - name: Run smoke tests
-        run: pytest -m swag_smoke -s -v --is_local False --reruns 2 --reruns-delay 2
+        run: pytest -m swag_smoke -s -v --is_local False
 
       - name: Gen dummy page
         run: |
