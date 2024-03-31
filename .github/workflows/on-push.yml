@@ -9,6 +9,7 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+
       - name: Run docker-compose
         run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
 
@@ -34,7 +35,7 @@ jobs:
       - name: Collect only before tests
         run: pytest --collect-only
 
-      - name: Run pytest tests
+      - name: Run smoke tests
         run: pytest -m swag_smoke -s -v --is_local False
 
       - name: Gen dummy page
