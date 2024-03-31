@@ -37,8 +37,31 @@ jobs:
       - name: Run pytest tests
         run: pytest -s -v --remote_mode selenoid
 
+      - name: Gen dummy page
+        run: |
+          mkdir public
+          cat > public/index.html <<EOL
+          <!doctype html>
+          <html>
+            <head>
+              <title>GitHub Pages deployed!</title>
+            </head>
+            <body>
+              <p>GitHub Pages with <strong>${{ github.sha }}</strong> commit ID has been deployed through <a href="https://github.com/marketplace/actions/github-pages">GitHub Pages action</a> successfully.</p>
+            </body>
+          </html>
+          EOL
+      -
+        name: Deploy to GitHub Pages
+        uses: crazy-max/ghaction-github-pages@v4
+        with:
+          target_branch: gh-pages
+          build_dir: public
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Generate Allure results
-        uses: simple-elf/allure-report-action@master
+        uses: simple-elf/allure-report-action@v1.9
         if: always()
         with:
           allure_results: allure-results
@@ -46,9 +69,3 @@ jobs:
           gh_pages: gh-pages
           allure_history: allure-history
 
-      - name: Deploy report to GitHub Pages
-        uses: crazy-max/ghaction-github-pages@v4.0.0
-        with:
-          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          PUBLISH_BRANCH: gh-pages
-          PUBLISH_DIR: allure-history
