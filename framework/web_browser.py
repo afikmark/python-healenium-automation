@@ -41,12 +41,10 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
             case _:
                 raise ValueError(f"Unexpected value {browser}")
         logger.info(f'Creating remote driver of {browser} type')
-        logger.info(f'Driver: {driver}')
-        if driver is None:
-            raise TypeError("Driver is None")
+
         return driver
     except Exception as e:
-        logger.error(f"failed to create driver {e}")
+        logger.error(f"failed to create driver.error: {e}")
 
 
 def _get_local_driver(browser: str):
