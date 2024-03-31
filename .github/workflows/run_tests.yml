@@ -1,0 +1,48 @@
+name: On push regression tests
+
+on: [ push ]
+
+jobs:
+  on_push:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: docker compose healenium
+      - uses: hoverkraft-tech/compose-action@v0.0.0
+        with:
+          compose-file: /framework/healenium/docker-compose/yaml        
+          up-flags: -d
+
+      - name: Set up Python 3.12
+        uses: actions/setup-python@v5.1.0
+        with:
+          python-version: 3.12
+
+      - name: Install dependencies
+        run:
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+
+      - name: Install pytest plugin
+        run: pip install pytest-github-actions-annotate-failures
+
+      - name: run tests
+        run: pytest -s -v --is_local False
+
+      - name: Get Allure history
+        uses: actions/checkout@v2
+        if: always()
+        continue-on-error: true
+        with:
+          ref: gh-pages
+          path: gh-pages
+
+      - name: Deploy report to Github Pages
+        if: always()
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+         github_token: ${{ secrets.GITHUB_TOKEN }}
+         publish_branch: gh-pages
+         publish_dir: allure-history
