@@ -1,6 +1,6 @@
 name: On push regression tests
 
-on: [push]
+on: [ push ]
 
 jobs:
   on_push:
@@ -9,11 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Docker Compose Action
-        uses: hoverkraft-tech/compose-action@v1.5.1
-        with:
-           compose-file: "framework/healenium/docker-compose.yml"
-           up-flags: "-d"
+      - name: Run docker-compose
+        run: docker compose -f framework/healenium/docker-compose.yaml up -d
 
       - name: Check Docker containers status
         run: docker ps -a
@@ -54,8 +51,7 @@ jobs:
             </body>
           </html>
           EOL
-      -
-        name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
