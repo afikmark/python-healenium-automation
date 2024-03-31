@@ -17,5 +17,15 @@
                 "path": "/wd/hub"
             }
         }
+    },
+    "edge": {
+    "default": "edge",
+    "versions": {
+        "edge": {
+            "image": "selenium/node-edge:latest",
+            "port": "4444",
+            "path": "/wd/hub"
+        }
     }
+}
 }
