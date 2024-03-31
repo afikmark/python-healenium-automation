@@ -35,7 +35,7 @@ jobs:
         run: pytest --collect-only
 
       - name: Run smoke tests
-        run: pytest -m swag_smoke -s -v --is_local False
+        run: pytest -m swag_smoke -s -v --is_local False --browser_type firefox
 
       - name: Gen dummy page
         run: |
