@@ -9,8 +9,8 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Start Selenoid Server
-        uses: Xotabu4/selenoid-github-action@v2
+      - name: Run docker-compose
+        run: docker-compose up -d
 
       - name: Check Docker containers status
         run: docker ps -a
