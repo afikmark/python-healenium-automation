@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
       - name: Start selenoid server
-      - uses: Xotabu4/selenoid-github-action@v2
+      - uses: ajinx/selenoid@2.0
 
       - name: Run docker-compose
         run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
