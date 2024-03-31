@@ -10,7 +10,7 @@ jobs:
         uses: actions/checkout@v4
 
       - name: Start selenoid server
-        uses: ajinx/selenoid@2.0
+        uses: Xotabu4/selenoid-github-action@v2
 
       - name: Run docker-compose
         run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
