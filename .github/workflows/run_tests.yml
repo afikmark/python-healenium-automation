@@ -3,14 +3,14 @@ name: On push regression tests
 on: [ push ]
 
 jobs:
-  on_push:
+  regression:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
         
       - name: docker compose healenium
-      - uses: hoverkraft-tech/compose-action@v0.0.0
+        uses: hoverkraft-tech/compose-action@v0.0.0
         with:
           compose-file: /framework/healenium/docker-compose/yaml        
           up-flags: -d
