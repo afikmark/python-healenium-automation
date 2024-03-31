@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+        
       - name: current dir
-      - run: ls -a
+        run: ls -a
         
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
