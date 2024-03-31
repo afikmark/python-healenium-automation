@@ -5,7 +5,7 @@
     },
     "remote": {
       "is_local": false,
-      "healenium_url": "http://127.0.0.1:8085",
+      "healenium_url": "http://localhost:8085",
       "selenoid_options": {
         "enableVideo": true,
         "enableVNC": true
