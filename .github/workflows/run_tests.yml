@@ -9,9 +9,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
         
-      - name: current dir
-        run: ls -a
-        
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
         with:
@@ -30,6 +27,9 @@ jobs:
 
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
+
+      - name: get current containers status
+        run:  docker ps -a
 
       - name: run tests
         run: pytest -s -v --is_local False
