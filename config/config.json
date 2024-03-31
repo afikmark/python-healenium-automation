@@ -4,7 +4,6 @@
       "is_local": true
     },
     "remote": {
-      "is_local": false,
       "healenium_url": "http://localhost:8085",
       "selenoid_options": {
         "enableVideo": true,
