@@ -5,7 +5,6 @@
     },
     "remote": {
       "is_local": false,
-      "selenoid_url": "http://localhost:4444/wd/hub",
       "healenium_url": "http://localhost:8085",
       "selenoid_options": {
         "enableVideo": true,

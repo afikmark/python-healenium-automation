@@ -3,7 +3,6 @@ from framework.web_browser import WebBrowser
 from framework.logger import get_logger
 from settings import ROOT_DIR
 from tests import Config
-from tests.config import RemoteMode
 from web_pages.healenium_demo.healenium_demo import HealeniumDemo
 from web_pages.swag_labs.swag_labs import SwagLabs
 import json
@@ -92,10 +91,8 @@ def pytest_addoption(parser):
     parser.addoption("--browser_type", action="store", help="browser for the automation tests", default="chrome")
     parser.addoption("--user", action="store", help="user for swag labs", default="standard")
     parser.addoption("--app", action="store", help="Application under test", default="swag_labs")
-    parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=False)
+    parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=True)
     parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
-    parser.addoption("--remote_mode", action="store", help="healenium OR selenoid",
-                     default=RemoteMode.HEALENIUM)
 
 
 @pytest.fixture(scope="session")
@@ -119,11 +116,6 @@ def is_local(request):
 
 
 @pytest.fixture(scope='session')
-def remote_mode(request):
-    return request.config.getoption('--remote_mode')
-
-
-@pytest.fixture(scope='session')
 def selenoid_options(app_config):
     return getattr(app_config, "selenoid_options", None)
 
@@ -136,11 +128,10 @@ def remote_url(app_config, request):
 
 
 @pytest.fixture(scope='session')
-def app_config(is_local, app, browser_type, remote_mode):
+def app_config(is_local, app, browser_type):
     cfg = Config(is_local=is_local,
                  app=app,
-                 browser_type=browser_type,
-                 remote_mode=remote_mode
+                 browser_type=browser_type
                  )
     return cfg
 

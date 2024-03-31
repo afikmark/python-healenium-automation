@@ -2,14 +2,8 @@ import json
 
 from settings import ROOT_DIR
 
-
-class RemoteMode:
-    HEALENIUM = "healenium"
-    SELENOID = "selenoid"
-
-
 class Config:
-    def __init__(self, is_local, app, remote_mode, browser_type='chrome'):
+    def __init__(self, is_local, app, browser_type='chrome'):
         with open(f'{ROOT_DIR}/config/config.json') as config_file:
             config_data = json.load(config_file)
 
@@ -21,6 +15,5 @@ class Config:
         self.user_password = config_data['user_info']['default_password']
         self.browser_type = config_data['browsers'][browser_type]
         if not self.is_local:
-            self.remote_url = self.env_config[
-                'healenium_url' if remote_mode == RemoteMode.HEALENIUM else 'selenoid_url']
+            self.remote_url = self.env_config['healenium_url']
             self.selenoid_options = self.env_config['selenoid_options']
