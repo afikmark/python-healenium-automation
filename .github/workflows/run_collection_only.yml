@@ -1,9 +1,9 @@
-name: On push regression tests
+name: run_collection_only
 
 on: [ push ]
 
 jobs:
-  on_push:
+  run_collection_only:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
