@@ -13,9 +13,6 @@ jobs:
       - name: Run docker-compose
         run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
 
-      - name: Run docker-compose again
-        run: docker-compose -f framework/healenium/docker-compose.yaml up -d
-
       - name: Check Docker containers status
         run: docker ps -a
 
