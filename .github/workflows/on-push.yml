@@ -9,8 +9,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Run docker-compose
-        run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
+      - name: Docker Compose Action
+        uses: hoverkraft-tech/compose-action@v1.5.1
+        with:
+           compose-file: "framework/healenium/docker-compose.yml"
+           up-flags: "-d"
 
       - name: Check Docker containers status
         run: docker ps -a
