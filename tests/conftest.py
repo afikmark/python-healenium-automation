@@ -122,9 +122,9 @@ def selenoid_options(app_config):
 
 @pytest.fixture(scope="session")
 def remote_url(app_config, request):
-    if request.config.getoption("--is_local"):
+    if not request.config.getoption("--is_local"):
         return None
-    return getattr(app_config, "remote_url", None)
+    return getattr(app_config, "base_url", None)
 
 
 @pytest.fixture(scope='session')
