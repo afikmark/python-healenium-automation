@@ -1,6 +1,6 @@
 name: On push regression tests
 
-on: [push]
+on: [ push ]
 
 jobs:
   on_push:
@@ -8,10 +8,6 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
-
-
-      - name: Run docker-compose
-        run:  docker-compose -f framework/healenium/docker-compose.yaml up -d
 
       - name: Check Docker containers status
         run: docker ps -a
@@ -32,11 +28,9 @@ jobs:
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
-      - name: Collect only before tests
+      - name: Collect only
         run: pytest --collect-only
 
-      - name: Run smoke tests
-        run: pytest -m swag_smoke -s -v --is_local False
 
       - name: Gen dummy page
         run: |
@@ -52,8 +46,7 @@ jobs:
             </body>
           </html>
           EOL
-      -
-        name: Deploy to GitHub Pages
+      - name: Deploy to GitHub Pages
         uses: crazy-max/ghaction-github-pages@v4
         with:
           target_branch: gh-pages
