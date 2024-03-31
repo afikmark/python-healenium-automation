@@ -22,7 +22,7 @@ def _create_driver(browser: str, remote_url=None, selenoid_options=None):
 def _get_remote_driver(browser: str, remote_url, selenoid_options):
     """ returns remote webdriver """
     logger.info(
-        f"creating remote driver with {browser} browser type, url: {remote_url},selenoid_options: {selenoid_options}")
+        f"creating remote driver with {browser} browser type, url: {remote_url}. selenoid_options: {selenoid_options}")
     try:
         match browser:
             case "firefox":
@@ -37,7 +37,6 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
                 options = ChromeOptions()
                 options.set_capability("selenoid:options", selenoid_options)
                 options.add_argument('--no-sandbox')
-                options.add_argument('--headless')
                 driver = webdriver.Remote(command_executor=remote_url, options=options)
             case _:
                 raise ValueError(f"Unexpected value {browser}")
