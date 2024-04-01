@@ -12,7 +12,7 @@ jobs:
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
         with:
-          compose-file: framework/healenium/docker-compose.yaml        
+          compose-file: framework/healenium/docker-compose-selenoid.yaml        
           up-flags: -d
 
       - name: Set up Python 3.12
