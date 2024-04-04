@@ -83,7 +83,7 @@ services:
       - SE_EVENT_BUS_SUBSCRIBE_PORT=4443
       - SE_NODE_MAX_INSTANCES=5
       - SE_NODE_MAX_SESSIONS=5
-      - SE_NODE_SESSION_TIMEOUT=20
+      - SE_NODE_SESSION_TIMEOUT=60
     networks:
       - healenium
 
