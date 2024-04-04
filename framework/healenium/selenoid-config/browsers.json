@@ -8,25 +8,35 @@
                 "path": "/"
             },
             "latest": {
-                "image": "selenoid/vnc_chrome:123.0",
+                "image": "selenoid/vnc_chrome:latest",
                 "port": "4444",
                 "path": "/"
             }
         }
     },
     "firefox": {
-        "default": "47.0",
+        "default": "latest",
         "versions": {
-            "123.0": {
-                "image": "selenoid/vnc_firefox:47.0",
+            "95.0": {
+                "image": "selenoid/vnc_firefox:95.0",
                 "port": "4444",
                 "path": "/wd/hub"
             },
-            "47.0": {
-                "image": "selenoid/vnc_firefox:47.0",
+            "latest": {
+                "image": "selenoid/vnc_firefox:latest",
                 "port": "4444",
                 "path": "/wd/hub"
             }
         }
-    }
+    },
+     "MicrosoftEdge": {
+        "default": "latest",
+        "versions": {
+          "88.0": {
+            "image": "browsers/edge:latest",
+            "port": "4444",
+            "path": "/"
+          }
+        }
+      }
 }
