@@ -10,7 +10,10 @@ jobs:
         uses: actions/checkout@v4
 
       - name: docker pull chrome image
-        run:  docker pull selenoid/vnc_chrome:123.0
+        run: |
+          docker pull selenoid/vnc_chrome
+          docker pull selenoid/vnc_firefox
+          docker pull browsers/edge
         
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
