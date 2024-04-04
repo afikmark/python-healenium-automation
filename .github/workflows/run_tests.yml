@@ -18,12 +18,12 @@ jobs:
       - name: get docker images
         run: docker images
           
-      # - name: Inspect images
-      #   run: |
-      #       # selenium/node-chrome
-      #       docker inspect 7d4814547560
-      #       # selenium/node-chrome
-      #       docker inspect 60ff7d35e483
+      - name: Inspect images
+        run: |
+            # seleniod
+            docker inspect b0be3a476a08
+            # selenoid-ui
+            docker inspect 3b509df6fda1
 
       - name: current running containers
         run: docker ps -a
