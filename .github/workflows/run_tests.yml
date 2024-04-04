@@ -28,7 +28,7 @@ jobs:
       - name: current running containers
         run: docker ps -a
       - name: ping port
-        run: curl localhost:8085
+        run: curl 0.0.0.0:8085
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
