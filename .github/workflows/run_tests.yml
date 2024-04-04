@@ -16,7 +16,7 @@ jobs:
           up-flags: -d
           
       - name: inspect
-        run: docker inspect node-chrome
+        run: docker inspect selenium/node-chrome:latest
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
