@@ -22,11 +22,13 @@ jobs:
           
       - name: Inspect images
         run: |
-            docker inspect d28c19771c7b
-            docker inspect dd22dd44e7f6
-            docker inspect baa454fdfd79
-            docker inspect b0be3a476a08
-            docker inspect 3b509df6fda1
+            # selenium/node-chrome
+            docker inspect 7d4814547560
+            # selenium/node-chrome
+            docker inspect 60ff7d35e483
+
+      - name: current running containers
+        run: docker ps -a
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
