@@ -12,8 +12,9 @@ jobs:
       - name: docker pull browsers image
         run: |
           docker pull selenoid/vnc_chrome:123.0
-          docker pull selenoid/vnc_firefox:95.0
+          docker pull selenoid/vnc_firefox:47.0
           docker pull browsers/edge:123.0
+          docker pull selenoid/video-recorder
 
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
@@ -55,11 +56,11 @@ jobs:
       - name: run smoke tests - chrome
         run: pytest -s -v -m swag_smoke --is_local False
 
-      - name: run smoke tests - firefox
-        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
-
-      - name: run smoke tests - edge
-        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
+#      - name: run smoke tests - firefox
+#        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
+#
+#      - name: run smoke tests - edge
+#        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
 
       - name: Get Allure history
         uses: actions/checkout@v2

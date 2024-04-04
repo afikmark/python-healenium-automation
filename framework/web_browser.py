@@ -35,7 +35,7 @@ def _get_remote_driver(browser: str, remote_url, selenoid_options):
                 driver = webdriver.Remote(command_executor=remote_url, options=options)
             case "chrome":
                 options = ChromeOptions()
-                # options.set_capability("selenoid:options", selenoid_options)
+                options.set_capability("selenoid:options", selenoid_options)
                 options.add_argument('--no-sandbox')
                 options.add_argument("--disable-setuid-sandbox")
                 options.add_argument('--disable-dev-shm-usage')
