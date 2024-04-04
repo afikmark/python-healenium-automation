@@ -1,6 +1,6 @@
 {
   "chrome": {
-    "default": "latest",
+    "default": "123.0",
     "versions": {
       "123.0": {
         "image": "selenoid/vnc_chrome:123.0",
@@ -15,7 +15,7 @@
     }
   },
   "firefox": {
-    "default": "latest",
+    "default": "95.0",
     "versions": {
       "95.0": {
         "image": "selenoid/vnc_firefox:95.0",
@@ -30,10 +30,10 @@
     }
   },
   "MicrosoftEdge": {
-    "default": "latest",
+    "default": "123.0",
     "versions": {
-      "latest": {
-        "image": "browsers/edge",
+      "123.0": {
+        "image": "browsers/edge:123.0",
         "port": "4444",
         "path": "/"
       }
