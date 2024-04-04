@@ -22,10 +22,10 @@ jobs:
           
       - name: Inspect images
         run: |
-            docker inspect 16b009f3d885
-            docker inspect b0be3a476a08
             docker inspect d28c19771c7b
             docker inspect dd22dd44e7f6
+            docker inspect baa454fdfd79
+            docker inspect b0be3a476a08
             docker inspect 3b509df6fda1
 
       - name: Set up Python 3.12
