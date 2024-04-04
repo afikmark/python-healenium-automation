@@ -8,8 +8,9 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
       - name: docker pull chrome image
-        run:  docker pull selenoid/vnc_chrome:latest
+        run:  docker pull selenoid/vnc_chrome:123.0
         
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
