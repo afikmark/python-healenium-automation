@@ -9,18 +9,21 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: docker pull chrome image
-        run:  docker pull selenoid/vnc_chrome:123.0
-        
+      - name: docker pull browsers image
+        run: |
+          docker pull selenoid/vnc_chrome:123.0
+          docker pull selenoid/vnc_firefox:47.0
+          docker pull browsers/edge:123.0
+
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
         with:
           compose-file: framework/healenium/docker-compose-selenoid.yaml
           up-flags: -d
-        
+
       - name: get docker images
         run: docker images
-          
+
       # - name: Inspect images
       #   run: |
       #       # seleniod
@@ -47,10 +50,16 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
 
       - name: get current containers status
-        run:  docker ps -a
+        run: docker ps -a
 
-      - name: run tests
-        run: pytest -s -v --is_local False
+      - name: run smoke tests - chrome
+        run: pytest -s -v -m swag_smoke --is_local False
+
+#      - name: run smoke tests - firefox
+#        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
+#
+#      - name: run smoke tests - edge
+#        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
 
       - name: Get Allure history
         uses: actions/checkout@v2
@@ -60,10 +69,18 @@ jobs:
           ref: gh-pages
           path: gh-pages
 
+      - name: Allure Report action from marketplace
+        uses: simple-elf/allure-report-action@v1.7
+        if: always()
+        with:
+            allure_results: allure-results
+            allure_history: allure-history
+            gh_pages: gh_pages
+
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3
         with:
-         github_token: ${{ secrets.GITHUB_TOKEN }}
-         publish_branch: gh-pages
-         publish_dir: allure-history
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: allure-history
