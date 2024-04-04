@@ -16,7 +16,7 @@ jobs:
           docker pull browsers/edge:123.0
 
       - name: docker compose healenium
-        uses: hoverkraft-tech/compose-action@v1.5.1
+        uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: framework/healenium/docker-compose-selenoid.yaml
           up-flags: -d
@@ -62,7 +62,7 @@ jobs:
 #        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
 
       - name: Get Allure history
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
         if: always()
         continue-on-error: true
         with:
@@ -79,7 +79,7 @@ jobs:
 
       - name: Deploy report to Github Pages
         if: always()
-        uses: peaceiris/actions-gh-pages@v3
+        uses: peaceiris/actions-gh-pages@v3.9.3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_branch: gh-pages
