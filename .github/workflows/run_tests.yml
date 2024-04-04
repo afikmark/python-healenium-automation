@@ -27,6 +27,8 @@ jobs:
 
       - name: current running containers
         run: docker ps -a
+      - name: ping port
+      - run: ping http://localhost:8085
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
