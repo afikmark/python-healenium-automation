@@ -14,18 +14,16 @@ jobs:
         with:
           compose-file: framework/healenium/docker-compose.yaml        
           up-flags: -d
-      # - name: Start Selenoid Server
-      #   uses: Xotabu4/selenoid-github-action@v2
         
-      - name: get docker images
-        run: docker images
+      # - name: get docker images
+      #   run: docker images
           
-      - name: Inspect images
-        run: |
-            # selenium/node-chrome
-            docker inspect 7d4814547560
-            # selenium/node-chrome
-            docker inspect 60ff7d35e483
+      # - name: Inspect images
+      #   run: |
+      #       # selenium/node-chrome
+      #       docker inspect 7d4814547560
+      #       # selenium/node-chrome
+      #       docker inspect 60ff7d35e483
 
       - name: current running containers
         run: docker ps -a
