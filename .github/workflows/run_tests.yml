@@ -8,6 +8,8 @@ jobs:
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+      - name: docker pull chrome image
+        run:  docker pull selenoid/vnc_chrome:latest
         
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
@@ -27,8 +29,8 @@ jobs:
 
       - name: current running containers
         run: docker ps -a
-      - name: netstat
-        run: netstat
+      # - name: netstat
+      #   run: netstat
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
