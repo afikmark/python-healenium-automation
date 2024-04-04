@@ -1,6 +1,6 @@
 {
     "chrome": {
-        "default": "111.0",
+        "default": "latest",
         "versions": {
             "latest": {
                 "image": "selenoid/vnc:chrome",
