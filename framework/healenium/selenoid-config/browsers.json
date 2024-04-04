@@ -2,9 +2,10 @@
     "chrome": {
         "default": "latest",
         "versions": {
-            "123.0": {
-                "image": "selenium/node-chrome:latest",
-                "port": "4444"
+            "latest": {
+                "image": "selenoid/chrome",
+                "port": "4444",
+                "tmpfs": {"/tmp":"size=512m"}
             }
         }
     },
@@ -12,7 +13,7 @@
         "default": "latest",
         "versions": {
             "latest": {
-                "image": "selenium/node-firefox:latest",
+                "image": "selenium/node-firefox",
                 "port": "4444",
                 "path": "/wd/hub"
             }
@@ -22,7 +23,7 @@
     "default": "edge",
     "versions": {
         "edge": {
-            "image": "selenium/node-edge:latest",
+            "image": "selenium/node-edge",
             "port": "4444",
             "path": "/wd/hub"
         }
