@@ -3,11 +3,11 @@
         "default": "latest",
         "versions": {
             "latest": {
-                "image": "selenoid/vnc:chrome",
+                "image": "selenoid:chrome",
                 "port": "4444"
             },
             "123.0": {
-                "image": "selenoid/vnc:chrome:123.0",
+                "image": "selenoid:chrome:123.0",
                 "port": "4444"
             }
         }
