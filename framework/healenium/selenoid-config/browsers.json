@@ -1,30 +1,33 @@
 {
     "chrome": {
-        "default": "111.0",
-        "versions": {
-            "111.0": {
-                "image": "selenoid/vnc:chrome_111.0",
-                "port": "4444"
-            },
-            "110.0": {
-                "image": "selenoid/vnc:chrome_110.0",
-                "port": "4444"
-            }
-        }
-    },
+		"default": "latest",
+		"versions": {
+			"latest": {
+				"image": "selenoid/chrome",
+				"port": "4444",
+				"tmpfs": {"/tmp":"size=512m"}
+			}
+		}
+	}
     "firefox": {
-        "default": "111.0",
-        "versions": {
-            "111.0": {
-                "image": "selenoid/vnc:firefox_111.0",
-                "port": "4444",
-                "path": "/wd/hub"
-            },
-            "110.0": {
-                "image": "selenoid/vnc:firefox_110.0",
-                "port": "4444",
-                "path": "/wd/hub"
-            }
+		"default": "latest",
+		"versions": {
+			"latest": {
+				"image": "selenoid/firefox",
+				"port": "4444",
+				"path": "/wd/hub",
+				"tmpfs": {"/tmp":"size=512m"}
+			}
+		}
+	},
+    "edge": {
+    "default": "edge",
+    "versions": {
+        "edge": {
+            "image": "selenoid/node-edge",
+            "port": "4444",
+            "path": "/wd/hub"
         }
     }
+}
 }
