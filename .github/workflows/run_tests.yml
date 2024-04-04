@@ -14,7 +14,6 @@ jobs:
           docker pull selenoid/vnc_chrome:123.0
           docker pull selenoid/vnc_firefox:47.0
           docker pull browsers/edge:123.0
-          docker pull selenoid/video-recorder
 
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
