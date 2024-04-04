@@ -11,9 +11,9 @@ jobs:
 
       - name: docker pull chrome image
         run: |
-          docker pull selenoid/vnc_chrome
-          docker pull selenoid/vnc_firefox
-          docker pull browsers/edge
+          docker pull selenoid/vnc_chrome:123.0
+          docker pull selenoid/vnc_firefox:95.0
+          docker pull browsers/edge:123.0
         
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v1.5.1
