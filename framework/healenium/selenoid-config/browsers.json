@@ -3,7 +3,7 @@
         "default": "latest",
         "versions": {
             "latest": {
-                "image": "selenoid/chrome",
+                "image": "selenium/chrome",
                 "port": "4444",
                 "tmpfs": {"/tmp":"size=512m"}
             }
