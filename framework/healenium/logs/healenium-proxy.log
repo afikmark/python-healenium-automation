@@ -1216,3 +1216,30 @@
 2024-03-31 13:26:22.829 DEBUG 1 - [8085-exec-8] healenium                        : [Proxy] Selenium server request: DELETE, http://selenium-hub:4444/wd/hub/session/c134a72dd0c1433ecdf259195f6b5e6d, org.openqa.selenium.remote.http.Contents$$Lambda$935/0x00007f9fa95030d0@34706f98 
 2024-03-31 13:26:22.901 DEBUG 1 - [8085-exec-8] healenium                        : [Proxy] Selenium server response: {"value":null} 
 2024-03-31 13:26:22.902 DEBUG 1 - [8085-exec-8] healenium                        : [Request Handler] Response data: {"value":null} 
+2024-04-04 17:57:18.881  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : Starting HealeniumProxyApplication v1.4.0 using Java 17.0.10 with PID 1 (/hlm-proxy.jar started by root in /) 
+2024-04-04 17:57:18.886  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : No active profile set, falling back to 1 default profile: "default" 
+2024-04-04 17:57:19.764  INFO 1 - [       main] o.s.b.w.e.t.TomcatWebServer      : Tomcat initialized with port 8085 (http) 
+2024-04-04 17:57:19.775  INFO 1 - [       main] o.a.c.core.StandardService       : Starting service [Tomcat] 
+2024-04-04 17:57:19.776  INFO 1 - [       main] o.a.c.core.StandardEngine        : Starting Servlet engine: [Apache Tomcat/10.1.18] 
+2024-04-04 17:57:19.807  INFO 1 - [       main] o.a.c.c.C.[.[localhost].[/]      : Initializing Spring embedded WebApplicationContext 
+2024-04-04 17:57:19.808  INFO 1 - [       main] rvletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 828 ms 
+2024-04-04 17:57:20.352  INFO 1 - [       main] o.s.b.w.e.t.TomcatWebServer      : Tomcat started on port 8085 (http) with context path '' 
+2024-04-04 17:57:20.368  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : Started HealeniumProxyApplication in 2.633 seconds (process running for 3.49) 
+2024-04-04 17:58:49.705  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : Starting HealeniumProxyApplication v1.4.0 using Java 17.0.10 with PID 1 (/hlm-proxy.jar started by root in /) 
+2024-04-04 17:58:49.709  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : No active profile set, falling back to 1 default profile: "default" 
+2024-04-04 17:58:50.536  INFO 1 - [       main] o.s.b.w.e.t.TomcatWebServer      : Tomcat initialized with port 8085 (http) 
+2024-04-04 17:58:50.544  INFO 1 - [       main] o.a.c.core.StandardService       : Starting service [Tomcat] 
+2024-04-04 17:58:50.544  INFO 1 - [       main] o.a.c.core.StandardEngine        : Starting Servlet engine: [Apache Tomcat/10.1.18] 
+2024-04-04 17:58:50.574  INFO 1 - [       main] o.a.c.c.C.[.[localhost].[/]      : Initializing Spring embedded WebApplicationContext 
+2024-04-04 17:58:50.575  INFO 1 - [       main] rvletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 782 ms 
+2024-04-04 17:58:51.122  INFO 1 - [       main] o.s.b.w.e.t.TomcatWebServer      : Tomcat started on port 8085 (http) with context path '' 
+2024-04-04 17:58:51.135  INFO 1 - [       main] .e.h.h.HealeniumProxyApplication : Started HealeniumProxyApplication in 2.147 seconds (process running for 2.647) 
+2024-04-04 17:59:28.653  INFO 1 - [8085-exec-1] o.a.c.c.C.[.[localhost].[/]      : Initializing Spring DispatcherServlet 'dispatcherServlet' 
+2024-04-04 17:59:28.653  INFO 1 - [8085-exec-1] o.s.w.s.DispatcherServlet        : Initializing Servlet 'dispatcherServlet' 
+2024-04-04 17:59:28.654  INFO 1 - [8085-exec-1] o.s.w.s.DispatcherServlet        : Completed initialization in 0 ms 
+2024-04-04 17:59:28.779  INFO 1 - [8085-exec-1] healenium                        : [Proxy] Using Selenium server: http://selenoid:4444/wd/hub 
+2024-04-04 17:59:28.852  INFO 1 - [8085-exec-1] healenium                        : [Create Session] Response from Selenium Server: {"value":{"error":"session not created","message":"create container: Error response from daemon: No such image: selenoid/vnc_chrome:123.0"}} 
+2024-04-04 18:00:03.223  INFO 1 - [8085-exec-2] healenium                        : [Proxy] Using Selenium server: http://selenoid:4444/wd/hub 
+2024-04-04 18:00:03.232  INFO 1 - [8085-exec-2] healenium                        : [Create Session] Response from Selenium Server: {"value":{"error":"session not created","message":"create container: Error response from daemon: No such image: selenoid/vnc_chrome:123.0"}} 
+2024-04-04 18:00:15.483  INFO 1 - [8085-exec-3] healenium                        : [Proxy] Using Selenium server: http://selenoid:4444/wd/hub 
+2024-04-04 18:00:15.490  INFO 1 - [8085-exec-3] healenium                        : [Create Session] Response from Selenium Server: {"value":{"error":"session not created","message":"create container: Error response from daemon: No such image: selenoid/vnc_chrome:123.0"}} 
