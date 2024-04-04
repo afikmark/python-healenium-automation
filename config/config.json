@@ -5,7 +5,10 @@
     },
     "remote": {
       "healenium_url": "http://localhost:8085",
-      "selenoid_options": {}
+      "selenoid_options": {
+        "enableVideo": true,
+        "enableVNC": true
+      }
     }
   },
   "app_urls": {
