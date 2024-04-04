@@ -14,9 +14,11 @@ jobs:
         with:
           compose-file: framework/healenium/docker-compose-selenoid.yaml        
           up-flags: -d
+      - name: get docker images
+        run: docker images
           
-      - name: inspect
-        run: docker inspect selenium/node-chrome:latest
+      # - name: inspect
+      #   run: docker inspect 
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
