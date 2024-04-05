@@ -50,7 +50,7 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
 
       - name: run smoke tests - chrome
-        run: pytest -s -v -m swag_smoke --is_local False --allure-dir=allure-results
+        run: pytest -s -v -m swag_smoke --is_local False
 
 #      - name: run smoke tests - firefox
 #        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
