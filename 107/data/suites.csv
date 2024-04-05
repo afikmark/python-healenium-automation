@@ -1,0 +1,9 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Apr 05 15:20:18 GMT 2024","Fri Apr 05 15:20:20 GMT 2024","1513","tests.swag_labs.login","test_login","","","","test_fail_login","
+    this test will fail if ran without healenium
+    and will pass if ran with healenium
+    "
+"passed","Fri Apr 05 15:20:16 GMT 2024","Fri Apr 05 15:20:17 GMT 2024","786","tests.swag_labs.login","test_login","","","","test_login","
+    This test validates the login functionality
+    of the application.
+    "
