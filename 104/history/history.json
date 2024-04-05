@@ -1,1 +1,0 @@
-{"206c5bc6efab1c12231448dc331eacfb":{"statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1},"items":[{"uid":"31e11aa0310ca16c","reportUrl":"https://afikmark.github.io/python-healenium-automation/104//#testresult/31e11aa0310ca16c","status":"passed","time":{"start":1712330155475,"stop":1712330156269,"duration":794}}]}}
