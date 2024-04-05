@@ -28,7 +28,7 @@ Run tests remotely using Healenium:
 ```sh
 pytest --browser_type=chrome --is_local False
 ```
-### Contributing
+### Contributing:
 Contributions are welcome! If you find any issues or improvements, feel free to open an issue or pull request.
 
 ### License
