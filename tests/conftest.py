@@ -9,6 +9,8 @@ from typing import Dict
 from framework.reporter import AllureReporter
 from pytest import StashKey, CollectReport
 
+from web_pages.the_internet import TheInternet
+
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
 
@@ -77,16 +79,23 @@ def screenshot_on_failure(request, driver, reporter):
 
 
 @pytest.fixture(scope="function")
-def swag_ui(driver, app_config):
+def swag_ui(driver, app_config, request):
+    request.config.option.app = "swag_labs"
     return SwagLabs(driver, app_config.app_url)
+
+
+@pytest.fixture(scope="function")
+def the_internet_ui(driver, app_config, request):
+    request.config.option.app = "the_internet"
+    return TheInternet(driver, app_config.app_url)
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser_type", action="store", help="browser for the automation tests", default="chrome")
     parser.addoption("--user", action="store", help="user for swag labs", default="standard")
-    parser.addoption("--app", action="store", help="Application under test", default="swag_labs")
+    parser.addoption("--app", action="store", help="Application under test")
     parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=True)
-    # parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
+    parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
 
 
 @pytest.fixture(scope="session")

@@ -73,7 +73,8 @@ class WebBrowser:
     """ Responsible for all web browser capabilities """
 
     def __init__(self, browser: str, remote_url: str, selenoid_options: Dict[str, bool]):
-        logger.info(f"Calling {_create_driver} with browser: {browser}, remote_url: {remote_url}, selenoid_options: {selenoid_options}")
+        logger.info(
+            f"Calling {_create_driver} with browser: {browser}, remote_url: {remote_url}, selenoid_options: {selenoid_options}")
         self.driver = _create_driver(browser, remote_url, selenoid_options)
         self.wait = Wait(self.driver)
 
@@ -137,6 +138,24 @@ class WebBrowser:
         captures a full screenshot as png format
         """
         return self.driver.get_screenshot_as_png()
+
+    def execute_js(self, script):
+        """
+        execute js
+        :param element:
+        :param script:
+        :return: None
+        """
+        return self.driver.execute_script(script)
+
+    def execute_script(self, script, element):
+        """
+        execute js on a specific element
+        :param script:
+        :param element:
+        :return:
+        """
+        return self.driver.execute_script(script, element)
 
 
 class Wait:
