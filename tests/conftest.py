@@ -86,7 +86,7 @@ def pytest_addoption(parser):
     parser.addoption("--user", action="store", help="user for swag labs", default="standard")
     parser.addoption("--app", action="store", help="Application under test", default="swag_labs")
     parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=True)
-    parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
+    # parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
 
 
 @pytest.fixture(scope="session")
