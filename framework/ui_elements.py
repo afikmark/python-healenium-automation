@@ -17,11 +17,28 @@ class TextInput:
         self._driver = driver
         self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
 
+    @property
+    def value(self) -> str:
+        """
+        returns the current value in input
+        :return: str
+        """
+        element = self._driver.find_element(self._locator)
+        return self._driver.execute_script(f"return arguments[0].value", element)
+
     def enter_text(self, text: str) -> None:
         """ enters text to element """
         element = self._driver.find_element(self._locator)
         element.clear()
         element.send_keys(text)
+
+    def clear_text(self) -> None:
+        """
+        clears text
+        :return:None
+        """
+        element = self._driver.find_element(self._locator)
+        element.clear()
 
 
 class Button:
