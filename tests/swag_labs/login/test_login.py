@@ -22,6 +22,7 @@ def test_login(swag_ui, app_config, user, reporter):
     assert inventory_page.is_in_page, 'tests if successfully redirected to inventory page'
 
 
+@mark.swag_smoke
 def test_fail_login(swag_ui, app_config, user, reporter):
     """
     this test will fail if ran without healenium
