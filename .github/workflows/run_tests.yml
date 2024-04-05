@@ -49,11 +49,8 @@ jobs:
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
-      - name: get current containers status
-        run: docker ps -a
-
       - name: run smoke tests - chrome
-        run: pytest -s -v -m swag_smoke --is_local False
+        run: pytest -s -v -m swag_smoke --is_local False --allure-dir=allure-results
 
 #      - name: run smoke tests - firefox
 #        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
@@ -74,13 +71,14 @@ jobs:
         if: always()
         with:
             allure_results: allure-results
-            allure_history: allure-history
+            allure-report: allure-report
             gh_pages: gh_pages
+            allure_history: allure-history
 
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3.9.3
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_branch: gh-pages
-          publish_dir: allure-history
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          PUBLISH_BRANCH: gh-pages
+          PUBLISH_DIR: allure-history

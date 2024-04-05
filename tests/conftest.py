@@ -3,7 +3,6 @@ from framework.web_browser import WebBrowser
 from framework.logger import get_logger
 from settings import ROOT_DIR
 from tests import Config
-from web_pages.healenium_demo.healenium_demo import HealeniumDemo
 from web_pages.swag_labs.swag_labs import SwagLabs
 import json
 from typing import Dict
