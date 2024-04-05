@@ -58,26 +58,20 @@ jobs:
 #      - name: run smoke tests - edge
 #        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
 
-      - name: Get Allure history
-        uses: actions/checkout@v4
+      - name: Allure results
+        uses: simple-elf/allure-report-action@master
         if: always()
-        continue-on-error: true
+        id: allure-report
         with:
-          ref: gh-pages
-          path: gh-pages
-
-      - name: Allure Report action from marketplace
-        uses: simple-elf/allure-report-action@v1.7
-        if: always()
-        with:
-            allure_results: allure-results
-            gh_pages: gh_pages
-            allure_history: allure-history
+          allure_results: allure-results
+          allure_report: allure-report
+          gh_pages: gh-pages
+          allure_history: allure-history
 
       - name: Deploy report to Github Pages
         if: always()
         uses: peaceiris/actions-gh-pages@v3.9.3
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          PERSONAL_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           PUBLISH_BRANCH: gh-pages
           PUBLISH_DIR: allure-history
