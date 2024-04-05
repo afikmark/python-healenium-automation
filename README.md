@@ -11,7 +11,7 @@ pip install -r requirements.txt
 ```
 - Docker installed
 ```sh
-- git clone https://github.com/your_username/PythonAutomationFramework.git
+- git clone https://github.com/your_username/python-healenium-automation.git
 ```
 ### Set Up Configuration
 Modify the config.json file in the config directory to match your environment settings, application URLs, and user info.
