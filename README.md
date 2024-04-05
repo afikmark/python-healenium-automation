@@ -6,6 +6,9 @@ This project demonstrates automated testing using Python with Healenium for self
 
 - Python 3.x installed on your system.
 - Dependencies installed from `requirements.txt`. You can install them using:
+```sh
+pip install -r requirements.txt
+```
 - Docker installed
 ```sh
 - git clone https://github.com/your_username/PythonAutomationFramework.git
