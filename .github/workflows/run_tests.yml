@@ -12,8 +12,11 @@ jobs:
       - name: docker run browsers image
         run: |
           docker run selenoid/vnc_chrome:123.0 -d
-          docker run selenoid/vnc_firefox:47.0 -d 
-          docker run browsers/edge:123.0 -d
+#          docker pull selenoid/vnc_firefox:47.0
+#          docker pull browsers/edge:123.0
+
+      - name: current running containers
+        run: docker ps
 
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v2.0.0
@@ -30,9 +33,6 @@ jobs:
       #       docker inspect b0be3a476a08
       #       # selenoid-ui
       #       docker inspect 3b509df6fda1
-
-      - name: current running containers
-        run: docker ps -a
       # - name: netstat
       #   run: netstat
 
