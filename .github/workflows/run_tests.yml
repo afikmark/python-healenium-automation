@@ -9,11 +9,11 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: docker pull browsers image
+      - name: docker run browsers image
         run: |
-          docker run selenoid/vnc_chrome:123.0
-          docker run selenoid/vnc_firefox:47.0
-          docker run browsers/edge:123.0
+          docker run selenoid/vnc_chrome:123.0 -d
+          docker run selenoid/vnc_firefox:47.0 -d 
+          docker run browsers/edge:123.0 -d
 
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v2.0.0
@@ -71,7 +71,6 @@ jobs:
         if: always()
         with:
             allure_results: allure-results
-            allure_report: allure-report
             gh_pages: gh_pages
             allure_history: allure-history
 
