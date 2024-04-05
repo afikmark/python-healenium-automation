@@ -9,9 +9,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: docker run browsers image
+      - name: docker pull browsers image
         run: |
-          docker run selenoid/vnc_chrome:123.0 -d
+          docker pull selenoid/vnc_chrome:123.0
 #          docker pull selenoid/vnc_firefox:47.0
 #          docker pull browsers/edge:123.0
 
