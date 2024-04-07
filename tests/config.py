@@ -11,7 +11,6 @@ class Config:
         self.is_local = True if is_local == "true" else False
         self.env_config = config_data['env']['local' if self.is_local else 'remote']
         self.base_url = "local" if self.is_local else config_data['env']['remote']['healenium_url']
-        self.selenoid_options = config_data['env']['remote']['selenoid_options'] if not self.is_local else None
         self.app_url = config_data['app_urls'][app]
         self.user_name = config_data['user_info']['default_name']
         self.user_password = config_data['user_info']['default_password']
