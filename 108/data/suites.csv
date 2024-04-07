@@ -1,5 +1,5 @@
 "Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Sun Apr 07 15:24:20 GMT 2024","Sun Apr 07 15:24:20 GMT 2024","0","tests.swag_labs.login","test_login","","","","test_login","
+"broken","Sun Apr 07 15:26:42 GMT 2024","Sun Apr 07 15:26:42 GMT 2024","0","tests.swag_labs.login","test_login","","","","test_login","
     This test validates the login functionality
     of the application.
     "
