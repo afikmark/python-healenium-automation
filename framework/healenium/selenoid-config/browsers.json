@@ -10,10 +10,10 @@
     }
   },
   "firefox": {
-    "default": "47.0",
+    "default": "95.0",
     "versions": {
-      "47.0": {
-        "image": "selenoid/vnc_firefox:47.0",
+      "95.0": {
+        "image": "selenoid/vnc_firefox:95.0",
         "port": "4444",
         "path": "/wd/hub"
       }

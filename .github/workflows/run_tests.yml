@@ -12,7 +12,7 @@ jobs:
       - name: docker pull browsers image
         run: |
           docker pull selenoid/vnc_chrome:123.0
-          docker pull selenoid/vnc_firefox:47.0
+          docker pull selenoid/vnc_firefox:95.0
           docker pull browsers/edge:123.0
 
       - name: current running containers
