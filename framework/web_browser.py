@@ -19,32 +19,29 @@ def _create_driver(browser: str, remote_url=None):
     return driver
 
 
-@retry_on_empty_result
+@retry_on_empty_result()
 def _get_remote_driver(browser: str, remote_url: str):
     """ returns remote webdriver """
     logger.info(
         f"creating remote driver with {browser} browser type, url: {remote_url}.")
-    try:
-        match browser:
-            case "firefox":
-                options = webdriver.FirefoxOptions()
-                driver = webdriver.Remote(command_executor=remote_url, options=options)
-            case "edge":
-                options = webdriver.EdgeOptions()
-                driver = webdriver.Remote(command_executor=remote_url, options=options)
-            case "chrome":
-                options = ChromeOptions()
-                options.add_argument('--no-sandbox')
-                options.add_argument("--disable-setuid-sandbox")
-                options.add_argument('--disable-dev-shm-usage')
-                driver = webdriver.Remote(command_executor=remote_url, options=options)
-            case _:
-                raise ValueError(f"Unexpected value {browser}")
-        logger.info(f'Creating remote driver of {browser} type')
+    match browser:
+        case "firefox":
+            options = webdriver.FirefoxOptions()
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
+        case "edge":
+            options = webdriver.EdgeOptions()
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
+        case "chrome":
+            options = ChromeOptions()
+            options.add_argument('--no-sandbox')
+            options.add_argument("--disable-setuid-sandbox")
+            options.add_argument('--disable-dev-shm-usage')
+            driver = webdriver.Remote(command_executor=remote_url, options=options)
+        case _:
+            raise ValueError(f"Unexpected value {browser}")
+    logger.info(f'Creating remote driver of {browser} type')
 
-        return driver
-    except Exception as e:
-        logger.error(f"failed to create driver.error: {e}")
+    return driver
 
 
 def _get_local_driver(browser: str):
