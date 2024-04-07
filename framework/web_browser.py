@@ -5,6 +5,7 @@ from selenium.webdriver.chrome.options import Options as ChromeOptions
 from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
 from framework.logger import get_logger
+from framework.utils import retry_on_empty_result
 
 logger = get_logger()
 
@@ -18,6 +19,7 @@ def _create_driver(browser: str, remote_url=None):
     return driver
 
 
+@retry_on_empty_result
 def _get_remote_driver(browser: str, remote_url: str):
     """ returns remote webdriver """
     logger.info(
@@ -33,6 +35,8 @@ def _get_remote_driver(browser: str, remote_url: str):
             case "chrome":
                 options = ChromeOptions()
                 options.add_argument('--no-sandbox')
+                options.add_argument("--disable-setuid-sandbox")
+                options.add_argument('--disable-dev-shm-usage')
                 driver = webdriver.Remote(command_executor=remote_url, options=options)
             case _:
                 raise ValueError(f"Unexpected value {browser}")

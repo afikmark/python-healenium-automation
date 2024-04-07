@@ -21,6 +21,15 @@ retry_on_true = partial(
     wrap_exception=True
 )
 
+retry_on_empty_result = partial(
+    retry,
+    wait_fixed=1500,
+    stop_max_attempt_number=5,
+    retry_on_result=lambda value: value in [None, [], {}, ''],
+    wrap_exception=True
+
+)
+
 
 class Regex:
 
