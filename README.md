@@ -21,15 +21,15 @@ You can run the tests with different configurations using pytest. Here are some 
 
 Run tests locally with Chrome:
 ```sh
-pytest --browser_type=chrome
+pytest --browser_type=chrome --app swag_labs
 ```
 Run tests with Firefox:
 ```sh
-pytest --browser_type=firefox
+pytest --browser_type=firefox --app swag_labs
 ```
 Run tests remotely using Healenium:
 ```sh
-pytest --browser_type=chrome --is_local False
+pytest --browser_type=chrome --is_local False --app swag_labs
 ```
 ### Contributing:
 Contributions are welcome! If you find any issues or improvements, feel free to open an issue or pull request.
