@@ -18,10 +18,10 @@ ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 
 @pytest.fixture(scope='function')
-def driver(request, browser_type, selenoid_options, remote_url):
+def driver(request, browser_type, remote_url):
     browser = browser_type
     try:
-        driver = WebBrowser(browser, remote_url, selenoid_options)
+        driver = WebBrowser(browser, remote_url)
         yield driver
         driver.quit_driver()
     except Exception as e:
@@ -116,11 +116,6 @@ def app(request):
 @pytest.fixture(scope='session')
 def is_local(request):
     return request.config.getoption('--is_local')
-
-
-@pytest.fixture(scope='session')
-def selenoid_options(app_config):
-    return getattr(app_config, "selenoid_options", None)
 
 
 @pytest.fixture(scope="session")

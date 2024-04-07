@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-from typing import NamedTuple
+from typing import NamedTuple, Type
 
 
 class Locator(NamedTuple):

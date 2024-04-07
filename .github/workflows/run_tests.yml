@@ -12,8 +12,8 @@ jobs:
       - name: docker pull browsers image
         run: |
           docker pull selenoid/vnc_chrome:123.0
-#          docker pull selenoid/vnc_firefox:47.0
-#          docker pull browsers/edge:123.0
+          docker pull selenoid/vnc_firefox:47.0
+          docker pull browsers/edge:123.0
 
       - name: current running containers
         run: docker ps
@@ -26,15 +26,6 @@ jobs:
 
       - name: get docker images
         run: docker images
-
-      # - name: Inspect images
-      #   run: |
-      #       # seleniod
-      #       docker inspect b0be3a476a08
-      #       # selenoid-ui
-      #       docker inspect 3b509df6fda1
-      # - name: netstat
-      #   run: netstat
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0
@@ -52,11 +43,11 @@ jobs:
       - name: run smoke tests - chrome
         run: pytest -s -v -m swag_smoke --is_local False --app swag_labs
 
-#      - name: run smoke tests - firefox
-#        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
-#
-#      - name: run smoke tests - edge
-#        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
+      - name: run smoke tests - firefox
+        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox
+
+      - name: run smoke tests - edge
+        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge
 
       - name: Allure results
         uses: simple-elf/allure-report-action@master

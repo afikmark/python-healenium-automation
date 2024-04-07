@@ -8,6 +8,13 @@ class Page:
         self.driver = browser
         self.url = url
 
+    def __getattr__(self, name: str):
+        """ Delegate attribute access to the WebBrowser instance """
+        if hasattr(self.driver, name):
+            return getattr(self.driver, name)
+        else:
+            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+
     @property
     def is_in_page(self) -> bool:
         """ validates browser is in current page """
