@@ -14,7 +14,7 @@ class LoginPage(Page):
         self.password_input = TextInput(self.PASSWORD_SELECTOR, driver)
         self.login_button = Button(self.LOGIN_BUTTON_SELECTOR, driver)
 
-    def login(self, email, password):
+    def login(self, email: str, password: str) -> None:
         """ fill username and password and submit the login button """
         self.user_name_input.enter_text(email)
         self.password_input.enter_text(password)

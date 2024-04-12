@@ -6,7 +6,7 @@ from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
 from framework.logger import get_logger
 from framework.utils import retry_on_empty_result
-
+from typing import Any
 logger = get_logger()
 
 
@@ -127,13 +127,13 @@ class WebBrowser:
         """
         return self.find_element(locator).text
 
-    def get_screenshot_as_png(self):
+    def get_screenshot_as_png(self) -> bytes:
         """
         captures a full screenshot as png format
         """
         return self.driver.get_screenshot_as_png()
 
-    def execute_js(self, script):
+    def execute_js(self, script) -> Any:
         """
         execute js script
         :param script:
@@ -141,7 +141,7 @@ class WebBrowser:
         """
         return self.driver.execute_script(script)
 
-    def execute_script(self, script, element):
+    def execute_script(self, script, element) -> Any:
         """
         execute js on a specific element
         :param script:
