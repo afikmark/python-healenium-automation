@@ -137,7 +137,7 @@ class WebBrowser:
         """
         execute js script
         :param script:
-        :return: None
+        :return: Any
         """
         return self.driver.execute_script(script)
 
