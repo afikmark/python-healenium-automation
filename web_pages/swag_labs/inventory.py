@@ -2,11 +2,11 @@ from web_pages.page import Page
 from framework.ui_elements import DropDown, Button, Locator, By
 from framework.logger import get_logger
 from framework.utils import Regex
-
 logger = get_logger()
 
 
 class InventoryItems:
+    """Inventory items names class for demo store 'Swag Labs' """
     BACKPACK = 'Sauce Labs Backpack'
     BIKE_LIGHT = 'Sauce Labs Bike Light'
     BOLT_T_SHIRT = 'Sauce Labs Bolt T-Shirt'
@@ -30,10 +30,19 @@ class InventoryPage(Page):
 
     @property
     def item(self) -> str:
+        """
+        :return: inventory item selector representation
+        """
         return self._current_item
 
     @item.setter
-    def item(self, item_name) -> None:
+    def item(self, item_name: str) -> None:
+        """
+         Gets item name, finds the item by id, and sets the current item
+         attribute.
+        :param item_name:
+        :return: None
+        """
         try:
             item_name = Regex.match_all_after_prefix(prefix='Sauce Labs ', text=item_name)
         except AttributeError as e:
@@ -57,11 +66,13 @@ class InventoryPage(Page):
         return [item.find_element(By.CSS_SELECTOR, '.inventory_item_name').text
                 for item in self.driver.find_elements(self.INVENTORY_LIST)]
 
-    def add_item_to_cart(self, item_name):
+    def add_item_to_cart(self, item_name) -> None:
+        """Adds an item to the cart by item name"""
         self.item = item_name
         self.add_to_cart_btn.click()
 
-    def add_items_to_cart(self, items: list):
+    def add_items_to_cart(self, items: list[str]) -> None:
+        """Adds a list of items to the cart by item name"""
         for item in items:
             self.item = item
             self.add_to_cart_btn.click()

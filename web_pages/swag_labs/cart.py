@@ -1,3 +1,5 @@
+from selenium.webdriver.remote.webelement import WebElement
+
 from web_pages.page import Page
 from framework.ui_elements import Button, Locator, By
 from framework.logger import get_logger
@@ -33,7 +35,7 @@ class CartItemsContainer:
         return len(self._driver.find_elements(self.CART_CONTENTS_CONTAINER)) == 0
 
     @property
-    def items(self):
+    def items(self) -> list[WebElement]:
         return self._driver.find_elements(self.ROOT_SELECTOR)
 
     @property
@@ -50,10 +52,12 @@ class CartItemsContainer:
         return Button(self.REMOVE_ITEM_BTN.format(formatted_item), self._driver)
 
     @staticmethod
-    def item_price(item):
+    def item_price(item) -> str:
+        """Returns the item price"""
         return item.find_element(*Locator(By.CSS_SELECTOR, '.inventory_item_price')).text
 
-    def get_item_by_name(self, item_name):
+    def get_item_by_name(self, item_name) -> WebElement:
+        """Return the cart item WebElement by name"""
         for item in self.items:
             if item.find_element(*Locator(By.CSS_SELECTOR, '.inventory_item_name')).text \
                     == item_name:

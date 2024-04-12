@@ -31,6 +31,7 @@ retry_on_empty_result = partial(
 
 
 class Regex:
+    """Class for all regular expressions used for testing"""
 
     @staticmethod
     def match_all_after_prefix(prefix, text):

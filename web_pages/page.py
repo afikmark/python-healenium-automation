@@ -1,4 +1,5 @@
 from framework.web_browser import WebBrowser
+from typing import Callable, Optional
 
 
 class Page:
@@ -8,12 +9,12 @@ class Page:
         self.driver = browser
         self.url = url
 
-    def __getattr__(self, name: str):
+    def __getattr__(self, item: str) -> Optional[Callable]:
         """ Delegate attribute access to the WebBrowser instance """
-        if hasattr(self.driver, name):
-            return getattr(self.driver, name)
+        if hasattr(self.driver, item):
+            return getattr(self.driver, item)
         else:
-            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{name}'")
+            raise AttributeError(f"'{self.__class__.__name__}' object has no attribute '{item}'")
 
     @property
     def is_in_page(self) -> bool:
