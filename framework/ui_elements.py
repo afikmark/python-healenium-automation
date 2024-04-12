@@ -1,6 +1,6 @@
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
-from typing import NamedTuple, Type
+from typing import NamedTuple
 
 
 class Locator(NamedTuple):
@@ -12,10 +12,10 @@ class Locator(NamedTuple):
 class TextInput:
     """ TextInput object """
 
-    def __init__(self, root_selector, driver):
+    def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
         self.root_selector = f'input{root_selector}'
         self._driver = driver
-        self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
+        self._locator = Locator(by, self.root_selector)
 
     @property
     def value(self) -> str:
@@ -44,10 +44,10 @@ class TextInput:
 class Button:
     """ Button object """
 
-    def __init__(self, root_selector, driver):
+    def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
         self.root_selector = f'{root_selector}'
         self._driver = driver
-        self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
+        self._locator = Locator(by, self.root_selector)
 
     @property
     def text(self) -> str:
@@ -60,10 +60,10 @@ class Button:
 class DropDown:
     """ DropDown Object """
 
-    def __init__(self, root_selector, driver):
+    def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
         self.root_selector = f'.select_container {root_selector}'
         self._driver = driver
-        self._locator = Locator(By.CSS_SELECTOR, self.root_selector)
+        self._locator = Locator(by, self.root_selector)
 
     @property
     def options(self) -> list:
@@ -77,3 +77,22 @@ class DropDown:
     def select_by_index(self, index: int) -> None:
         element = self._driver.find_element(self._locator)
         Select(element).select_by_index(index)
+
+
+class HyperLink:
+    """Hyper link object"""
+
+    def __init__(self, root_selector: str, driver, by: str = By.CSS_SELECTOR):
+        self._driver = driver
+        self._locator = Locator(by, root_selector)
+
+    @property
+    def label(self) -> str:
+        """
+        Returns the text label for hyperlink
+        """
+        return self._driver.get_text(self._locator)
+
+    def click_link(self) -> None:
+        """Clicks on hyperlink"""
+        self._driver.click(self._locator)

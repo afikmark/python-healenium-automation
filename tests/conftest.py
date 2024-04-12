@@ -4,12 +4,11 @@ from framework.logger import get_logger
 from settings import ROOT_DIR
 from tests import Config
 from web_pages.swag_labs.swag_labs import SwagLabs
+from web_pages.para_bank.para_bank import ParaBank
 import json
 from typing import Dict
 from framework.reporter import AllureReporter
 from pytest import StashKey, CollectReport
-
-from web_pages.the_internet import TheInternet
 
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
@@ -85,9 +84,9 @@ def swag_ui(driver, app_config, request):
 
 
 @pytest.fixture(scope="function")
-def the_internet_ui(driver, app_config, request):
-    request.config.option.app = "the_internet"
-    return TheInternet(driver, app_config.app_url)
+def para_bank_ui(driver, app_config, request):
+    request.config.option.app = "para_bank"
+    return ParaBank(driver, app_config.app_url)
 
 
 def pytest_addoption(parser):

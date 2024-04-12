@@ -1,5 +1,6 @@
 from pytest import mark
 from web_pages.swag_labs.web_flows.swag_web_flows import login
+from assertpy import assert_that
 
 
 @mark.swag_ui
@@ -16,4 +17,4 @@ def test_remove_item_from_cart(swag_ui, app_config, user):
     cart_page.open()
     cart_page.cart_items_container.item = inventory_page.inventory_items.BACKPACK
     cart_page.cart_items_container.remove_item_btn().click()
-    assert cart_page.cart_items_container.is_cart_empty(), 'is cart empty'
+    assert_that(cart_page.cart_items_container.is_cart_empty(), 'is cart empty').is_true()
