@@ -84,12 +84,6 @@ def swag_ui(driver, app_config, request):
     return SwagLabs(driver, app_config.app_url)
 
 
-@pytest.fixture(scope="function")
-def the_internet_ui(driver, app_config, request):
-    request.config.option.app = "the_internet"
-    return TheInternet(driver, app_config.app_url)
-
-
 def pytest_addoption(parser):
     parser.addoption("--browser_type", action="store", help="browser for the automation tests", default="chrome")
     parser.addoption("--user", action="store", help="user for swag labs", default="standard")
