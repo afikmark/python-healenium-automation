@@ -9,10 +9,19 @@ class Locator(NamedTuple):
     selector: str
 
 
-class TextInput:
+class Component:
+    """Basic UI Component"""
+
+    def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
+        self._driver = driver
+        self._locator = Locator(by, root_selector)
+
+
+class TextInput(Component):
     """ TextInput object """
 
     def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
+        super().__init__(root_selector, driver, by)
         self.root_selector = f'input{root_selector}'
         self._driver = driver
         self._locator = Locator(by, self.root_selector)
@@ -41,10 +50,11 @@ class TextInput:
         element.clear()
 
 
-class Button:
+class Button(Component):
     """ Button object """
 
     def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
+        super().__init__(root_selector, driver, by)
         self.root_selector = f'{root_selector}'
         self._driver = driver
         self._locator = Locator(by, self.root_selector)
@@ -57,10 +67,11 @@ class Button:
         self._driver.click(self._locator)
 
 
-class DropDown:
+class DropDown(Component):
     """ DropDown Object """
 
     def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
+        super().__init__(root_selector, driver, by)
         self.root_selector = f'.select_container {root_selector}'
         self._driver = driver
         self._locator = Locator(by, self.root_selector)
@@ -79,10 +90,11 @@ class DropDown:
         Select(element).select_by_index(index)
 
 
-class HyperLink:
+class HyperLink(Component):
     """Hyper link object"""
 
     def __init__(self, root_selector: str, driver, by: str = By.CSS_SELECTOR):
+        super().__init__(root_selector, driver, by)
         self._driver = driver
         self._locator = Locator(by, root_selector)
 
