@@ -79,20 +79,17 @@ def screenshot_on_failure(request, driver, reporter):
 
 @pytest.fixture(scope="function")
 def swag_ui(driver, app_config, request):
-    request.config.option.app = "swag_labs"
-    return SwagLabs(driver, app_config.app_url)
+    return SwagLabs(driver)
 
 
 @pytest.fixture(scope="function")
 def para_bank_ui(driver, app_config, request):
-    request.config.option.app = "para_bank"
-    return ParaBank(driver, app_config.app_url)
+    return ParaBank(driver)
 
 
 def pytest_addoption(parser):
     parser.addoption("--browser_type", action="store", help="browser for the automation tests", default="chrome")
     parser.addoption("--user", action="store", help="user for swag labs", default="standard")
-    parser.addoption("--app", action="store", help="Application under test")
     parser.addoption("--is_local", action="store", help="run locally or remotely, accept true/false", default=True)
     parser.addoption("--allurdir", action="store", help="allure results directory", default="allure-results")
 
@@ -108,11 +105,6 @@ def browser_type(request):
 
 
 @pytest.fixture(scope='session')
-def app(request):
-    return request.config.getoption("--app")
-
-
-@pytest.fixture(scope='session')
 def is_local(request):
     return request.config.getoption('--is_local')
 
@@ -125,9 +117,8 @@ def remote_url(app_config, request):
 
 
 @pytest.fixture(scope='session')
-def app_config(is_local, app, browser_type):
+def app_config(is_local, browser_type):
     cfg = Config(is_local=is_local,
-                 app=app,
                  browser_type=browser_type
                  )
     return cfg

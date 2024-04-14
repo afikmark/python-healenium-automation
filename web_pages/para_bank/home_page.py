@@ -49,6 +49,7 @@ class RegistrationPanel(Component):
     PASSWORD_CONFIRM_SELECTOR: str = '#customerForm #repeatedPassword'
     REGISTER_SELECTOR: str = '#customerForm .button[type="submit"]'
 
+
     def __init__(self, root_selector: str, driver):
         super().__init__(root_selector, driver)
         self.title_locator = Locator(By.CSS_SELECTOR, f'{root_selector} h1.title')
@@ -66,20 +67,29 @@ class RegistrationPanel(Component):
         self.password_confirm_input = TextInput(f'{root_selector} {self.PASSWORD_CONFIRM_SELECTOR}', driver)
         self.register_btn = Button(f'{root_selector} {self.REGISTER_SELECTOR}', driver)
 
-    def register(self, **register_data: RegistrationForm):
+    @property
+    def title_text(self) -> str:
+        return self._driver.get_text(self.title_locator)
+
+    @property
+    def sub_title_text(self) -> str:
+        return self._driver.get_text(self.sub_title_locator)
+
+    def register(self, register_data: dict) -> None:
         """Takes registration data and register a new user"""
         try:
+            register_data.pop("address")
             registration_data = RegistrationForm(**register_data)
         except ValidationError as e:
             raise RegisterValidationError(f"Validation error: {e}")
         self.first_name_input.enter_text(registration_data.first_name)
         self.last_name_input.enter_text(registration_data.last_name)
-        self.address_street_input.enter_text(registration_data.address)
+        self.address_street_input.enter_text(registration_data.address_street)
         self.address_city_input.enter_text(registration_data.city)
         self.address_state_input.enter_text(registration_data.state)
-        self.address_zipcode_input.enter_text(str(registration_data.zip_code))
-        self.phone_number_input.enter_text(str(registration_data.phone_number))
-        self.ssn_input.enter_text(str(registration_data.ssn))
+        self.address_zipcode_input.enter_text(registration_data.zip_code)
+        self.phone_number_input.enter_text(registration_data.phone_number)
+        self.ssn_input.enter_text(registration_data.ssn)
         self.user_name_input.enter_text(registration_data.user_name)
         self.password_input.enter_text(registration_data.password.get_secret_value())
         self.password_confirm_input.enter_text(registration_data.confirm_password.get_secret_value())

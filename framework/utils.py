@@ -71,3 +71,24 @@ class DataGenerator:
     def address() -> str:
         addresses = USER_QUERIES.get_address()
         return random.choice(addresses)
+
+    @staticmethod
+    def phone_number() -> str:
+        """
+        Standard US telephone number: 10-digit number
+        where the first three digits are the area code
+        second three digits is the central office code
+        and last four digits is the line number.
+        """
+        area_code = ''.join(random.choices('0123456789', k=3))
+        central_office_code = ''.join(random.choices('0123456789', k=3))
+        line_number = ''.join(random.choices('0123456789', k=4))
+        phone_number = f'({area_code}) {central_office_code}-{line_number}'
+        return phone_number
+
+
+
+def read_file(path):
+    with open(path) as f:
+        content = f.read()
+        return content
