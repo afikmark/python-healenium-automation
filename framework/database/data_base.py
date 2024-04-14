@@ -28,18 +28,7 @@ class MongoDbClient(DbClient):
     def get_collection(self, *, data_base: str, collection: str) -> Collection[Mapping[str, Any] | Any]:
         return self.cluster[data_base][collection]
 
-
-# mongo_client_url = "mongodb+srv://afikmark:5JyM1AdyT8zFkvTY@cluster0.ywacopc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"
 if __name__ == '__main__':
     client = MongoDbClient(MONGO_URL)
     users_collection = client.get_collection(data_base="users", collection="users")
     print(users_collection.find_one({"_id": 0}))
-
-# post = {"_id": 0, "first_name": ["John", "Ashley", "Kate", 'Daniel', 'Emily', 'Daniel'],
-#         "last_name": ["Mark", "Smith", "Briar", 'Miller', 'Brown', 'Williams'],
-#         "address": [{"state": "NY", "city": "New York", "street": "Maple Ave", "zip_code": "16156"},
-#                     {'state': 'CA', 'city': 'San Diego', 'street': 'Park Ave', 'zip_code': '07746'},
-#                     {'state': 'AZ', 'city': 'Phoenix', 'street': 'Washington St', 'zip_code': '76343'},
-#                     {'state': 'TX', 'city': 'San Antonio', 'street': 'Main St', 'zip_code': '97916'}]}
-
-# print(collection.find_one({"_id": 0}))

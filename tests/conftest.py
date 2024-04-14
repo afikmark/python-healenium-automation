@@ -3,12 +3,12 @@ import json
 from pytest import StashKey, CollectReport
 from typing import Dict
 from tests import Config
-from web_pages.swag_labs.swag_labs import SwagLabs
-from web_pages.para_bank.para_bank import ParaBank
 from settings import ROOT_DIR
 from framework.reporter import AllureReporter
 from framework.web_browser import WebBrowser
 from framework.logger import get_logger
+from web_pages.para_bank.para_bank import ParaBank
+from web_pages.swag_labs.swag_labs import SwagLabs
 
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
