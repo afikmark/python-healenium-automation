@@ -36,11 +36,10 @@ jobs:
         run:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-
-      - name: Extract Secrets
-        uses: Plabick/GitHub-Secret-Extractor@v2.2.0
-        with:
-          secret: ${{ secrets.MONGO_URL}}
+          
+      - name: Extract secrets
+        env:
+            MONGO_URL: ${{ secrets.MONGO_URL }}
 
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
