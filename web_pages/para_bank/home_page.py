@@ -1,52 +1,13 @@
 from selenium.webdriver.common.by import By
+
+from forms.para_bank.register import RegistrationForm, RegisterValidationError
+from forms.para_bank.login import LoginForm, LoginValidationError
 from web_pages.page import Page
 from framework.ui_elements import TextInput, Button, HyperLink, Component, Locator
-from pydantic import BaseModel, SecretStr, Field, ValidationError
+from pydantic import ValidationError
 from framework.logger import get_logger
 
 logger = get_logger()
-
-
-class LoginValidationError(Exception):
-    """Custom exception for login validation errors"""
-    pass
-
-
-class RegisterValidationError(Exception):
-    """Custom exception for registration validation errors"""
-    pass
-
-
-class LoginForm(BaseModel):
-    user_name: str = Field(examples=["test_user"],
-                           description="User name")
-    password: SecretStr = Field(examples=["Password123"],
-                                description="Password of the user")
-
-
-class RegistrationForm(BaseModel):
-    first_name: str = Field(examples=["test_user"],
-                            description="first name")
-    last_name: str = Field(examples=["test_user"],
-                           description="last name")
-    address: str = Field(examples=["473 Big Rock Cove Street Metairie, LA 70001"],
-                         description="address")
-    city: str = Field(examples=["San Diego"],
-                      description="City name")
-    state: str = Field(examples=["CA"],
-                       description="State name")
-    zip_code: int = Field(examples=[92103],
-                          description="Zip code")
-    phone_number: int = Field(examples=[6193317553],
-                              description="Phone number")
-    ssn: int = Field(examples=[502948172],
-                     description="Social security number")
-    user_name: str = Field(examples=["test_user"],
-                           description="User name")
-    password: SecretStr = Field(examples=["Password123"],
-                                description="Password of the user")
-    confirm_password: SecretStr = Field(examples=["Password123"],
-                                        description="Confirmation for password input must be the same")
 
 
 class LoginPanel(Component):
