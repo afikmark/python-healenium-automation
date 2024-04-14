@@ -38,7 +38,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Extract Secrets
-        uses: Plabick/GitHub-Secret-Extractor@master
+        uses: Plabick/GitHub-Secret-Extractor@v2.2.0
         with:
           secret: ${{ secrets.MONGO_URL}}
 
