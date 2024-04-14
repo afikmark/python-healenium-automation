@@ -1,14 +1,14 @@
 import pytest
-from framework.web_browser import WebBrowser
-from framework.logger import get_logger
-from settings import ROOT_DIR
+import json
+from pytest import StashKey, CollectReport
+from typing import Dict
 from tests import Config
 from web_pages.swag_labs.swag_labs import SwagLabs
 from web_pages.para_bank.para_bank import ParaBank
-import json
-from typing import Dict
+from settings import ROOT_DIR
 from framework.reporter import AllureReporter
-from pytest import StashKey, CollectReport
+from framework.web_browser import WebBrowser
+from framework.logger import get_logger
 
 logger = get_logger()
 phase_report_key = StashKey[Dict[str, CollectReport]]()
