@@ -67,5 +67,7 @@ class DataGenerator:
         last_names = USER_QUERIES.get_last_names()
         return random.choice(last_names)
 
-    # @staticmethod
-    # def address() -> str:
+    @staticmethod
+    def address() -> str:
+        addresses = USER_QUERIES.get_address()
+        return random.choice(addresses)

@@ -16,7 +16,14 @@ class UsersQueries:
         return first_names
 
     def get_last_names(self) -> list[str]:
-        projection = {"first_name": 1, "_id": 0}
+        projection = {"last_name": 1, "_id": 0}
         cursor = self.client.get_collection(data_base=self.DB, collection=self.COLLECTION).find({}, projection)
-        first_names = [name for doc in cursor for name in doc.get("last_name", [])]
-        return first_names
+        last_names = [name for doc in cursor for name in doc.get("last_name", [])]
+        return last_names
+
+    def get_address(self) -> list[dict]:
+        projection = {"address": 1, "_id": 0}
+        cursor = self.client.get_collection(data_base=self.DB, collection=self.COLLECTION).find({}, projection)
+        addresses = [name for doc in cursor for name in doc.get("address", [])]
+        return addresses
+

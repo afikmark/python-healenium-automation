@@ -38,10 +38,11 @@ class RegistrationFactory(DictWithAttributes):
     """Factory class for creating a new user"""
     first_name: str = DataGenerator.first_name()
     last_name: str = DataGenerator.last_name()
-    # address: str =
-    # city: str =
-    # state: str =
-    # zip_code: str =
+    address: dict = DataGenerator.address()
+    address_street: str = address['street']
+    city: str = address['city']
+    state: str = address['state']
+    zip_code: str = address['zip_code']
     # phone_number: str =
     # ssn: str = DataGenerator.ssn()
     # user_name: str =
