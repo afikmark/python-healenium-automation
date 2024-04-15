@@ -9,8 +9,13 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
+      - name: Convert Github Secrets or GitHub Variables to Environment variables
+        uses: driblash/secrets-to-environment-variables-action@v1.0.4
+        with:
+          secrets: ${{ toJSON(secrets) }}
+
       - name: Checkout again
-        uses: actions/checkout@v1
+        uses: actions/checkout@v4
 
       - name: Set up Python 3.12
         uses: actions/setup-python@v5.1.0

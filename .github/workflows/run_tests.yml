@@ -13,8 +13,7 @@ jobs:
         uses: driblash/secrets-to-environment-variables-action@v1.0.4
         with:
           secrets: ${{ toJSON(secrets) }}
-      - run: echo "Value of MONGO_URL:$MONGO_URL"
-            
+
 
       - name: docker compose pull browsers
         uses: hoverkraft-tech/compose-action@v2.0.0
