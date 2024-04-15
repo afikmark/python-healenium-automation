@@ -1,12 +1,12 @@
+from typing import Any
 from selenium import webdriver
 from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as ec
 from selenium.webdriver.chrome.options import Options as ChromeOptions
-from framework.ui_elements import Locator
 from selenium.webdriver.support.wait import WebDriverWait
+from framework.ui_elements import Locator
 from framework.logger import get_logger
 from framework.utils import retry_on_empty_result
-from typing import Any
 logger = get_logger()
 
 

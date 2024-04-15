@@ -1,0 +1,11 @@
+2024-04-13 23:07:42.202 | INFO     | tests.conftest:pytest_collection_modifyitems:141 - Test information including params:
+{
+  "test_login_form": "The objective of this test is to verify the ui elements of the login form"
+}
+2024-04-13 23:07:42.217 | INFO     | framework.web_browser:__init__:71 - Calling <function _create_driver at 0x0000022D18F33BA0> with browser: chrome, remote_url: None
+2024-04-13 23:07:43.338 | INFO     | framework.web_browser:_get_local_driver:62 - Creating local driver of chrome type
+2024-04-13 23:07:43.339 | INFO     | framework.web_browser:_get_local_driver:63 - Driver: <selenium.webdriver.chrome.webdriver.WebDriver (session="f3e44f44e4390e26e7714353d67f1a9e")>
+2024-04-13 23:07:43.341 | INFO     | tests.conftest:write_test_details:64 - path is C:\Users\afikm\PycharmProjects\python-healenium-automation\allure-results\environment.properties
+2024-04-13 23:07:43.342 | INFO     | tests.conftest:write_test_details:67 - writing current driver details
+2024-04-13 23:07:49.785 | INFO     | framework.web_browser:find_element:103 - finding element, Locator(by='xpath', selector='//*[@id="loginPanel"]//a[text()="Forgot login info?"]')
+2024-04-13 23:07:50.846 | INFO     | framework.web_browser:find_element:103 - finding element, Locator(by='xpath', selector='//*[@id="loginPanel"]//a[text()="Register"]')

@@ -4,7 +4,7 @@ This project demonstrates automated testing using Python with Healenium for self
 
 ## Prerequisites
 
-- Python 3.x installed on your system.
+- Python 3.12 installed on your system.
 - Dependencies installed from `requirements.txt`. You can install them using:
 ```sh
 pip install -r requirements.txt
@@ -13,23 +13,36 @@ pip install -r requirements.txt
 ```sh
 - git clone https://github.com/your_username/python-healenium-automation.git
 ```
-### Set Up Configuration
+## Set Up Configuration
 Modify the config.json file in the config directory to match your environment settings, application URLs, and user info.
+### pull selenoid browsers
+```shell
+docker compose -f framework/docker-browsers-pull.yaml up -d
+```
 
+### Set up healenium
+```shell
+docker compose -f /framework/healenium/docker-compose-selenoid.yaml up -d
+```
 ### Run Tests
 You can run the tests with different configurations using pytest. Here are some examples:
 
 Run tests locally with Chrome:
 ```sh
-pytest --browser_type=chrome --app swag_labs
+pytest --browser_type=chrome --is_local True
+```
+
+Run tests with Chrome:
+```sh
+pytest --browser_type=chrome --is_local False
 ```
 Run tests with Firefox:
 ```sh
-pytest --browser_type=firefox --app swag_labs
+pytest --browser_type=firefox --is_local False
 ```
 Run tests remotely using Healenium:
 ```sh
-pytest --browser_type=chrome --is_local False --app swag_labs
+pytest --browser_type=chrome --is_local False 
 ```
 ### Contributing:
 Contributions are welcome! If you find any issues or improvements, feel free to open an issue or pull request.

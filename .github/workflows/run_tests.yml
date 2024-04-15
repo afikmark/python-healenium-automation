@@ -9,20 +9,26 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: docker pull browsers image
-        run: |
-          docker pull selenoid/vnc_chrome:123.0
-          docker pull selenoid/vnc_firefox:95.0
-          docker pull browsers/edge:123.0
+      - name: Convert Github Secrets or GitHub Variables to Environment variables
+        uses: driblash/secrets-to-environment-variables-action@v1.0.4
+        with:
+          secrets: ${{ toJSON(secrets) }}
 
-      - name: current running containers
-        run: docker ps
+
+      - name: docker compose pull browsers
+        uses: hoverkraft-tech/compose-action@v2.0.0
+        with:
+          compose-file: framework/docker-browsers-pull.yaml
+          up-flags: -d
 
       - name: docker compose healenium
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
           compose-file: framework/healenium/docker-compose-selenoid.yaml
           up-flags: -d
+
+      - name: current running containers
+        run: docker ps -a
 
       - name: get docker images
         run: docker images
@@ -40,14 +46,14 @@ jobs:
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
-      - name: run smoke tests - chrome
-        run: pytest -s -v -m swag_smoke --is_local False --app swag_labs
+      - name: run tests - chrome
+        run: pytest -s -v --is_local False
 
-      - name: run smoke tests - firefox
-        run: pytest -s -v -m swag_smoke --is_local False --browser_type firefox --app swag_labs
+      - name: run tests - firefox
+        run: pytest -s -v  --is_local False --browser_type firefox
 
-      - name: run smoke tests - edge
-        run: pytest -s -v -m swag_smoke --is_local False --browser_type edge --app swag_labs
+      - name: run tests - edge
+        run: pytest -s -v --is_local False --browser_type edge
 
       - name: Allure results
         uses: simple-elf/allure-report-action@master

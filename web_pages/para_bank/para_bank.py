@@ -4,7 +4,7 @@ from .home_page import ParaBankHomePage
 
 class ParaBank(Page):
 
-    def __init__(self, driver, base_url):
-        super().__init__(driver, base_url)
-        self.url = base_url
+    def __init__(self, driver):
+        self.url = "https://parabank.parasoft.com/parabank/index.htm"
+        super().__init__(driver, self.url)
         self.home_page = ParaBankHomePage(driver, self.url)

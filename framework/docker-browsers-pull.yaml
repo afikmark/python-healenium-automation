@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  vnc_chrome:
+    image: selenoid/vnc_chrome:123.0
+    container_name: vnc_chrome
+    restart: unless-stopped
+
+  vnc_firefox:
+    image: selenoid/vnc_firefox:95.0
+    container_name: vnc_firefox
+    restart: unless-stopped
+
+  edge:
+    image: browsers/edge:123.0
+    container_name: edge
+    restart: unless-stopped
