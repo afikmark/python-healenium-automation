@@ -1,0 +1,17 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Mon Apr 15 06:40:39 GMT 2024","Mon Apr 15 06:40:40 GMT 2024","777","tests.swag_labs.inventory","test_inventory","","","","test_inventory_add_to_cart_button","
+    This test verifies the functionality of add to cart button
+    "
+"passed","Mon Apr 15 06:40:42 GMT 2024","Mon Apr 15 06:40:43 GMT 2024","829","tests.swag_labs.login","test_login","","","","test_fail_login","
+    this test will fail if ran without healenium
+    and will pass if ran with healenium
+    "
+"passed","Mon Apr 15 06:40:32 GMT 2024","Mon Apr 15 06:40:36 GMT 2024","3150","tests.para_bank","test_para_bank_register","","","","test_register","The objective of this test is to verify the registration flow"
+"passed","Mon Apr 15 06:40:37 GMT 2024","Mon Apr 15 06:40:38 GMT 2024","873","tests.swag_labs.cart","test_cart","","","","test_remove_item_from_cart","
+    This test validates the flow of removing items from the cart
+    "
+"passed","Mon Apr 15 06:40:41 GMT 2024","Mon Apr 15 06:40:41 GMT 2024","634","tests.swag_labs.login","test_login","","","","test_login","
+    This test validates the login functionality
+    of the application.
+    "
+"passed","Mon Apr 15 06:40:31 GMT 2024","Mon Apr 15 06:40:31 GMT 2024","431","tests.para_bank","test_para_bank_login","","","","test_login_form","The objective of this test is to verify the ui elements of the login form"
