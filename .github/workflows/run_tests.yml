@@ -47,7 +47,7 @@ jobs:
         run: pip install pytest-github-actions-annotate-failures
 
       - name: run tests - chrome
-        run: pytest -s -v -m swag_smoke --is_local False
+        run: pytest -s -v --is_local False
 
       - name: run tests - firefox
         run: pytest -s -v  --is_local False --browser_type firefox
