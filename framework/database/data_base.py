@@ -27,8 +27,3 @@ class MongoDbClient(DbClient):
 
     def get_collection(self, *, data_base: str, collection: str) -> Collection[Mapping[str, Any] | Any]:
         return self.cluster[data_base][collection]
-
-if __name__ == '__main__':
-    client = MongoDbClient(MONGO_URL)
-    users_collection = client.get_collection(data_base="users", collection="users")
-    print(users_collection.find_one({"_id": 0}))
