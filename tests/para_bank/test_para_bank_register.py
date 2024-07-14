@@ -4,6 +4,13 @@ from forms.para_bank.register import RegistrationFactory
 from framework.utils import read_file
 import os
 from framework.utils import retry_on_false
+from api_flows.para_bank import ParaBankApi
+
+
+def test_login():
+    api = ParaBankApi()
+    res = api.login("john", "demo")
+    print(res)
 
 
 def test_register(para_bank_ui, reporter):
