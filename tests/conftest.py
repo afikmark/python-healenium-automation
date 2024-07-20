@@ -2,6 +2,8 @@ import pytest
 import json
 from pytest import StashKey, CollectReport
 from typing import Dict
+
+from framework.api.rest_api import RestApi
 from tests import Config
 from settings import ROOT_DIR
 from framework.reporter import AllureReporter
@@ -85,6 +87,10 @@ def swag_ui(driver, app_config, request):
 @pytest.fixture(scope="function")
 def para_bank_ui(driver, app_config, request):
     return ParaBank(driver)
+
+@pytest.fixture(scope="function")
+def apis():
+    return RestApi()
 
 
 def pytest_addoption(parser):

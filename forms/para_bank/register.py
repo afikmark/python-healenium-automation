@@ -36,20 +36,16 @@ class RegistrationForm(BaseModel):
 
 class RegistrationFactory(DictWithAttributes):
     """Factory class for creating a new user"""
-    first_name: str = f'{DataGenerator.first_name()}{random.randint(0,1000)}'
-    last_name: str = DataGenerator.last_name()
-    address: dict = DataGenerator.address()
+    data_generator = DataGenerator()
+    first_name: str = f'{data_generator.first_name()}{random.randint(0,1000)}'
+    last_name: str = data_generator.last_name()
+    address: dict = data_generator.address()
     address_street: str = address['street']
     city: str = address['city']
     state: str = address['state']
     zip_code: str = address['zip_code']
-    phone_number: str = DataGenerator.phone_number()
-    ssn: str = DataGenerator.ssn()
+    phone_number: str = data_generator.phone_number()
+    ssn: str = data_generator.ssn()
     user_name: str = first_name
     password: str = "test_password"
     confirm_password: str = "test_password"
-
-
-if __name__ == '__main__':
-    f = RegistrationFactory()
-    print(f)

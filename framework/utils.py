@@ -1,5 +1,4 @@
 import string
-from framework.database.users_queries import UsersQueries
 from retrying import retry
 from functools import partial
 import re
@@ -41,11 +40,28 @@ class Regex:
         return re.match(rf'{prefix}(.*)', text).group(1)
 
 
-USER_QUERIES = UsersQueries()
-
-
 class DataGenerator:
     """Data generator class for tests"""
+
+    ADDRESSES = [{'state': 'NY',
+                  'city': 'New York',
+                  'street': 'Maple Ave',
+                  'zip_code': '16156'},
+                 {'state': 'CA',
+                  'city': 'San Diego',
+                  'street': 'Park Ave',
+                  'zip_code': '07746'},
+                 {'state': 'AZ',
+                  'city': 'Phoenix',
+                  'street': 'Washington St',
+                  'zip_code': '76343'},
+                 {'state': 'TX',
+                  'city': 'San Antonio',
+                  'street': 'Main St',
+                  'zip_code': '97916'}
+                 ]
+    FIRST_NAMES = ['John', 'Ashley', 'Daniel', 'Emily', 'Kate']
+    LAST_NAMES = ['Mark', 'Smith', 'Briar', 'Miller', 'Brown', 'Williams']
 
     @staticmethod
     def ssn() -> str:
@@ -57,20 +73,14 @@ class DataGenerator:
 
         return f'{area_number}{group_number}{serial_number}'
 
-    @staticmethod
-    def first_name() -> str:
-        first_names = USER_QUERIES.get_first_names()
-        return random.choice(first_names)
+    def first_name(self) -> str:
+        return random.choice(self.FIRST_NAMES)
 
-    @staticmethod
-    def last_name() -> str:
-        last_names = USER_QUERIES.get_last_names()
-        return random.choice(last_names)
+    def last_name(self) -> str:
+        return random.choice(self.LAST_NAMES)
 
-    @staticmethod
-    def address() -> str:
-        addresses = USER_QUERIES.get_address()
-        return random.choice(addresses)
+    def address(self) -> str:
+        return random.choice(self.ADDRESSES)
 
     @staticmethod
     def phone_number() -> str:
@@ -85,7 +95,6 @@ class DataGenerator:
         line_number = ''.join(random.choices('0123456789', k=4))
         phone_number = f'({area_code}) {central_office_code}-{line_number}'
         return phone_number
-
 
 
 def read_file(path):
