@@ -1,4 +1,4 @@
-from requests import Session, request, Response
+from requests import Session, Response
 
 
 class RestApi:
