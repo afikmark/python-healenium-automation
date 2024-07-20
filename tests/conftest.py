@@ -2,6 +2,8 @@ import pytest
 import json
 from pytest import StashKey, CollectReport
 from typing import Dict
+
+from api_flows.para_bank import ParaBankApi
 from tests import Config
 from settings import ROOT_DIR
 from framework.reporter import AllureReporter
@@ -18,6 +20,10 @@ ALLURE_RESULTS_PATH = fr'{ROOT_DIR}\allure-results'
 
 @pytest.fixture(scope='function')
 def driver(request, browser_type, remote_url):
+    if any(marker.name == 'api' for marker in request.node.own_markers):
+        # Skip browser initialization for API tests
+        yield None
+        return
     browser = browser_type
     try:
         driver = WebBrowser(browser, remote_url)
@@ -47,6 +53,12 @@ def test_details(driver) -> dict:
     """
     retrieve current driver information
     """
+    if driver is None:
+        return {
+            'name': 'None',
+            'version': 'None',
+            'platform': 'None'
+        }
     return {
         'name': driver.name.capitalize(),
         'version': driver.capabilities['browserVersion'],
@@ -72,9 +84,17 @@ def screenshot_on_failure(request, driver, reporter):
     yield  # Allow the test to run
     report = request.node.stash[phase_report_key]
     if report.get("call").failed or report.get("setup").failed:
-        screenshot = driver.get_screenshot_as_png()
-        logger.info("Test failed: attaching screenshot.")
-        reporter.attach_img(screenshot=screenshot)
+        if driver:
+            try:
+                screenshot = driver.get_screenshot_as_png()
+                logger.info("Test failed: attaching screenshot.")
+                reporter.attach_img(screenshot=screenshot)
+            except Exception as e:
+                logger.error(f"Failed to take screenshot: {e}")
+        else:
+            logger.info("Test failed: driver is not available, skipping screenshot.")
+
+
 
 
 @pytest.fixture(scope="function")
@@ -85,6 +105,11 @@ def swag_ui(driver, app_config, request):
 @pytest.fixture(scope="function")
 def para_bank_ui(driver, app_config, request):
     return ParaBank(driver)
+
+
+@pytest.fixture(scope="function")
+def para_bank_api(request):
+    return ParaBankApi()
 
 
 def pytest_addoption(parser):
@@ -130,3 +155,8 @@ def pytest_collection_modifyitems(items):
         for item in items
     }
     logger.info('Test information including params:\n{}'.format(json.dumps(test_info, indent=2)))
+
+    for item in items:
+        # Check if the test uses the para_bank_api fixture
+        if 'para_bank_api' in getattr(item, 'fixturenames', []):
+            item.add_marker('api')

@@ -9,12 +9,6 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Convert Github Secrets or GitHub Variables to Environment variables
-        uses: driblash/secrets-to-environment-variables-action@v1.0.4
-        with:
-          secrets: ${{ toJSON(secrets) }}
-
-
       - name: docker compose pull browsers
         uses: hoverkraft-tech/compose-action@v2.0.0
         with:
@@ -38,9 +32,12 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install dependencies
+      - name: Upgrade pip
         run:
           python -m pip install --upgrade pip
+
+      - name: Install dependencies
+        run:
           pip install -r requirements.txt
 
       - name: Install pytest plugin

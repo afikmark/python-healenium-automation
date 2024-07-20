@@ -49,7 +49,6 @@ class RegistrationPanel(Component):
     PASSWORD_CONFIRM_SELECTOR: str = '#customerForm #repeatedPassword'
     REGISTER_SELECTOR: str = '#customerForm .button[type="submit"]'
 
-
     def __init__(self, root_selector: str, driver):
         super().__init__(root_selector, driver)
         self.title_locator = Locator(By.CSS_SELECTOR, f'{root_selector} h1.title')
@@ -96,12 +95,19 @@ class RegistrationPanel(Component):
         self.register_btn.click()
 
 
+class AccountsOverview(Component):
+    def __init__(self, root_selector: str, driver):
+        super().__init__(root_selector, driver)
+
+
 class ParaBankHomePage(Page):
     LOGIN_PANEL_SELECTOR: str = "#loginPanel"
     REGISTRATION_PANEL_SELECTOR: str = "#rightPanel"
+    ACCOUNTS_OVERVIEW_PANEL: str = "#overviewAccountsApp"
 
     def __init__(self, driver, base_url):
         super().__init__(driver, base_url)
         self.url = base_url
         self.login_panel = LoginPanel(self.LOGIN_PANEL_SELECTOR, driver)
         self.registration_panel = RegistrationPanel(self.REGISTRATION_PANEL_SELECTOR, driver)
+        self.accounts_overview_panel = AccountsOverview(self.ACCOUNTS_OVERVIEW_PANEL, driver)
