@@ -3,7 +3,7 @@ import json
 from pytest import StashKey, CollectReport
 from typing import Dict
 
-from api_flows.para_bank import ParaBankApi
+from apis.pet_store import PetStoreApi
 from tests import Config
 from settings import ROOT_DIR
 from framework.reporter import AllureReporter
@@ -108,8 +108,8 @@ def para_bank_ui(driver, app_config, request):
 
 
 @pytest.fixture(scope="function")
-def para_bank_api(request):
-    return ParaBankApi()
+def pet_store_api(request):
+    return PetStoreApi()
 
 
 def pytest_addoption(parser):
@@ -158,5 +158,5 @@ def pytest_collection_modifyitems(items):
 
     for item in items:
         # Check if the test uses the para_bank_api fixture
-        if 'para_bank_api' in getattr(item, 'fixturenames', []):
+        if 'pet_store_api' in getattr(item, 'fixturenames', []):
             item.add_marker('api')
