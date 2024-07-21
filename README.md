@@ -6,9 +6,24 @@ This project demonstrates automated testing using Python with Healenium for self
 
 - Python 3.12 installed on your system.
 - Dependencies installed from `requirements.txt`. You can install them using:
-```sh
-pip install -r requirements.txt
-```
+
+
+1. **Create a Virtual Environment**:
+    ```sh
+    python -m venv venv
+    ```
+
+2. **Activate the Virtual Environment**:
+    - **Windows**:
+      ```sh
+      .\venv\Scripts\activate
+      ```
+    - **macOS/Linux**:
+      ```sh
+      source venv/bin/activate
+      ```
+
+
 - Docker installed
 ```sh
 - git clone https://github.com/your_username/python-healenium-automation.git
