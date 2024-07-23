@@ -22,7 +22,7 @@ class TextInput(Component):
 
     def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
         super().__init__(root_selector, driver, by)
-        self.root_selector = f'{root_selector}'
+        self.root_selector = root_selector
         self._driver = driver
         self._locator = Locator(by, self.root_selector)
 
@@ -55,7 +55,7 @@ class Button(Component):
 
     def __init__(self, root_selector, driver, by: str = By.CSS_SELECTOR):
         super().__init__(root_selector, driver, by)
-        self.root_selector = f'{root_selector}'
+        self.root_selector = root_selector
         self._driver = driver
         self._locator = Locator(by, self.root_selector)
 
