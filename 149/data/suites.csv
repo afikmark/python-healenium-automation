@@ -1,0 +1,23 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Wed Jul 24 17:30:37 GMT 2024","Wed Jul 24 17:30:37 GMT 2024","0","framework.tests","test_ui_elements","","","","test_text_input_enter_text",""
+"passed","Wed Jul 24 17:30:40 GMT 2024","Wed Jul 24 17:30:42 GMT 2024","2083","tests.para_bank","test_para_bank_register","","","","test_register","The objective of this test is to verify the registration flow"
+"passed","Wed Jul 24 17:30:47 GMT 2024","Wed Jul 24 17:30:48 GMT 2024","653","tests.swag_labs.login","test_login","","","","test_login","
+    This test validates the login functionality
+    of the application.
+    "
+"passed","Wed Jul 24 17:30:45 GMT 2024","Wed Jul 24 17:30:46 GMT 2024","800","tests.swag_labs.inventory","test_inventory","","","","test_inventory_add_to_cart_button","
+    This test verifies the functionality of add to cart button
+    "
+"passed","Wed Jul 24 17:30:43 GMT 2024","Wed Jul 24 17:30:44 GMT 2024","934","tests.swag_labs.cart","test_cart","","","","test_remove_item_from_cart","
+    This test validates the flow of removing items from the cart
+    "
+"passed","Wed Jul 24 17:30:37 GMT 2024","Wed Jul 24 17:30:37 GMT 2024","1","framework.tests","test_ui_elements","","","","test_button_click",""
+"passed","Wed Jul 24 17:30:37 GMT 2024","Wed Jul 24 17:30:37 GMT 2024","0","framework.tests","test_ui_elements","","","","test_button_text",""
+"passed","Wed Jul 24 17:30:38 GMT 2024","Wed Jul 24 17:30:38 GMT 2024","462","tests.para_bank","test_para_bank_login","","","","test_login_form","The objective of this test is to verify the ui elements of the login form"
+"passed","Wed Jul 24 17:30:37 GMT 2024","Wed Jul 24 17:30:37 GMT 2024","0","framework.tests","test_ui_elements","","","","test_text_input_value",""
+"passed","Wed Jul 24 17:30:49 GMT 2024","Wed Jul 24 17:30:50 GMT 2024","821","tests.swag_labs.login","test_login","","","","test_fail_login","
+    this test will fail if ran without healenium
+    and will pass if ran with healenium
+    "
+"passed","Wed Jul 24 17:30:42 GMT 2024","Wed Jul 24 17:30:42 GMT 2024","289","tests.pet_store","test_user","","","","test_create_user",""
+"passed","Wed Jul 24 17:30:42 GMT 2024","Wed Jul 24 17:30:42 GMT 2024","291","tests.pet_store","test_user","","","","test_login",""

@@ -1,5 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"broken","Wed Jul 24 17:26:09 GMT 2024","Wed Jul 24 17:26:09 GMT 2024","0","framework.tests","test_ui_elements","","","","test_text_input_enter_text",""
-"broken","Wed Jul 24 17:26:09 GMT 2024","Wed Jul 24 17:26:09 GMT 2024","0","framework.tests","test_ui_elements","","","","test_button_click",""
-"broken","Wed Jul 24 17:26:09 GMT 2024","Wed Jul 24 17:26:09 GMT 2024","0","framework.tests","test_ui_elements","","","","test_button_text",""
-"broken","Wed Jul 24 17:26:09 GMT 2024","Wed Jul 24 17:26:09 GMT 2024","0","framework.tests","test_ui_elements","","","","test_text_input_value",""
