@@ -29,12 +29,10 @@ def hyperlink(mock_driver):
 
 
 def test_text_input_enter_text(text_input, mock_driver, mocker):
-    # Create a mock element
     mock_element = mocker.Mock()
-    # Mock the find_element method to return the mock element
+
     mock_driver.find_element.return_value = mock_element
 
-    # Call the method under test
     text_input.enter_text("hello")
 
     # Verify that the clear method was called once on the mock element
@@ -44,9 +42,8 @@ def test_text_input_enter_text(text_input, mock_driver, mocker):
 
 
 def test_text_input_value(text_input, mock_driver, mocker):
-    # Create a mock element
     mock_element = mocker.Mock()
-    # Mock the find_element method to return the mock element
+
     mock_driver.find_element.return_value = mock_element
     # Mock the execute_script method to return a test value
     mock_driver.execute_script.return_value = "test value"
@@ -62,22 +59,18 @@ def test_text_input_value(text_input, mock_driver, mocker):
 
 
 def test_button_click(button, mock_driver, mocker):
-    # Mock the element
     mock_element = mocker.Mock()
     mock_driver.find_element.return_value = mock_element
-    # Call the method under test
     button.click()
     # Verify the click method was called once on the mock element
     mock_driver.click.assert_called_once_with(Locator(By.CSS_SELECTOR, '#button'))
 
 
 def test_button_text(button, mock_driver, mocker):
-    # Mock the element
     mock_element = mocker.Mock()
     mock_driver.find_element.return_value = mock_element
     mock_driver.get_text.return_value = "Submit"
 
-    # Call the method under test
     text = button.text
 
     # Assert the text value is as expected
