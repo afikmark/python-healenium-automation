@@ -4,8 +4,10 @@ from forms.para_bank.register import RegistrationFactory
 from framework.utils import read_file
 import os
 from framework.utils import retry_on_false
+import pytest
 
 
+@pytest.mark.sanity
 def test_register(para_bank_ui, reporter):
     """The objective of this test is to verify the registration flow"""
     reporter.step(name="Step", message="Opening home page")

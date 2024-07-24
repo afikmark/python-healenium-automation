@@ -3,7 +3,6 @@ from web_pages.swag_labs.web_flows.swag_web_flows import login
 from assertpy import assert_that
 
 
-@mark.swag_ui
 def test_remove_item_from_cart(swag_ui, app_config, user):
     """
     This test validates the flow of removing items from the cart
