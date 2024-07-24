@@ -1,0 +1,1 @@
+{"total":2,"items":[{"uid":"4019e68046a9b2c1773c5a17d8f3fb3e","name":"tests.pet_store","statistic":{"failed":0,"broken":0,"skipped":0,"passed":2,"unknown":0,"total":2}},{"uid":"120085b35472f05f8d8e9b1fa3adf75f","name":"tests.para_bank","statistic":{"failed":0,"broken":0,"skipped":0,"passed":1,"unknown":0,"total":1}}]}
