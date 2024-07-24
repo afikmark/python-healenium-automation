@@ -1,6 +1,6 @@
 import pytest
 from selenium.webdriver.common.by import By
-from .ui_elements import TextInput, Locator, Button, HyperLink, DropDown
+from framework.ui_elements import TextInput, Locator, Button, HyperLink, DropDown
 
 
 @pytest.fixture

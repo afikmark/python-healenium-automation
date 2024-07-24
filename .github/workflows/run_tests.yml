@@ -43,6 +43,9 @@ jobs:
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
+      - name: run framework unittests
+        run: pytest framework/tests
+
       - name: run tests - chrome
         run: pytest -s -v --is_local False
 
