@@ -4,8 +4,7 @@ from assertpy import assert_that
 logger = get_logger()
 
 
-@mark.swag_smoke
-@mark.swag_ui
+@mark.swag_sanity
 def test_login(swag_ui, app_config, user, reporter):
     """
     This test validates the login functionality
@@ -22,7 +21,7 @@ def test_login(swag_ui, app_config, user, reporter):
     assert_that(inventory_page.is_in_page, 'successfully redirected to inventory page').is_true()
 
 
-@mark.swag_smoke
+@mark.swag_sanity
 def test_fail_login(swag_ui, app_config, user, reporter):
     """
     this test will fail if ran without healenium

@@ -43,14 +43,17 @@ jobs:
       - name: Install pytest plugin
         run: pip install pytest-github-actions-annotate-failures
 
-      - name: run tests - chrome
-        run: pytest -s -v --is_local False
+      - name: run framework unittests
+        run: pytest framework/tests
 
-      - name: run tests - firefox
-        run: pytest -s -v  --is_local False --browser_type firefox
+      - name: run sanity tests - chrome
+        run: pytest -s -v -m sanity
 
-      - name: run tests - edge
-        run: pytest -s -v --is_local False --browser_type edge
+      - name: run sanity tests - firefox
+        run: pytest -s -v  --browser_type firefox -m sanity
+
+      - name: run sanity tests - edge
+        run: pytest -s -v --browser_type edge -m sanity
 
       - name: Allure results
         uses: simple-elf/allure-report-action@master

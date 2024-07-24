@@ -3,7 +3,6 @@ from pytest import mark
 from assertpy import assert_that
 
 
-@mark.swag_ui
 def test_inventory_add_to_cart_button(swag_ui, app_config, user):
     """
     This test verifies the functionality of add to cart button
