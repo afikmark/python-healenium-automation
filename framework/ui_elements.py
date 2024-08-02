@@ -108,3 +108,59 @@ class HyperLink(Component):
     def click_link(self) -> None:
         """Clicks on hyperlink"""
         self._driver.click(self._locator)
+
+
+class Table(Component):
+    """ Table object """
+
+    def __init__(self, root_selector, driver, by: str = By.XPATH):
+        super().__init__(root_selector, driver, by)
+        self.root_selector = root_selector
+        self._driver = driver
+        self._locator = Locator(by, self.root_selector)
+
+    def get_all_rows(self) -> list:
+        """
+        Returns all rows of the table.
+        :return: List of WebElement rows
+        """
+        return self._driver.find_elements(Locator(By.XPATH, f"{self.root_selector}//tr"))
+
+    def get_row(self, row_index: int) -> list:
+        """
+        Returns a specific row by index.
+        :param row_index: Index of the row (0-based)
+        :return: List of WebElement cells in the row
+        """
+        rows = self.get_all_rows()
+        return rows[row_index].find_elements(By.XPATH, ".//td")
+
+    def get_cell(self, row_index: int, col_index: int):
+        """
+        Returns a specific cell in the table.
+        :param row_index: Index of the row (0-based)
+        :param col_index: Index of the column (0-based)
+        :return: WebElement of the cell
+        """
+        row = self.get_row(row_index)
+        return row[col_index]
+
+    def get_cell_text(self, row_index: int, col_index: int) -> str:
+        """
+        Returns the text of a specific cell.
+        :param row_index: Index of the row (0-based)
+        :param col_index: Index of the column (0-based)
+        :return: Text content of the cell
+        """
+        cell = self.get_cell(row_index, col_index)
+        return cell.text
+
+    def click_cell(self, row_index: int, col_index: int) -> None:
+        """
+        Clicks a specific cell.
+        :param row_index: Index of the row (0-based)
+        :param col_index: Index of the column (0-based)
+        :return: None
+        """
+        cell = self.get_cell(row_index, col_index)
+        cell.click()
