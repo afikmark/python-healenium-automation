@@ -1,0 +1,4 @@
+"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
+"passed","Fri Aug 02 14:56:43 GMT 2024","Fri Aug 02 14:56:43 GMT 2024","252","tests.pet_store","test_user","","","","test_create_user",""
+"passed","Fri Aug 02 14:56:41 GMT 2024","Fri Aug 02 14:56:43 GMT 2024","2002","tests.para_bank","test_para_bank_register","","","","test_register","The objective of this test is to verify the registration flow"
+"passed","Fri Aug 02 14:56:43 GMT 2024","Fri Aug 02 14:56:43 GMT 2024","315","tests.pet_store","test_user","","","","test_login",""
