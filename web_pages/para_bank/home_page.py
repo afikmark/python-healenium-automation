@@ -107,7 +107,7 @@ class ParaBankHomePage(Page):
 
     def __init__(self, driver, base_url):
         super().__init__(driver, base_url)
-        self.url = base_url
+        self.url = f'{base_url}/index.htm'
         self.login_panel = LoginPanel(self.LOGIN_PANEL_SELECTOR, driver)
         self.registration_panel = RegistrationPanel(self.REGISTRATION_PANEL_SELECTOR, driver)
         self.accounts_overview_panel = AccountsOverview(self.ACCOUNTS_OVERVIEW_PANEL, driver)

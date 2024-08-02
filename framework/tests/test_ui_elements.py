@@ -1,6 +1,6 @@
 import pytest
 from selenium.webdriver.common.by import By
-from framework.ui_elements import TextInput, Locator, Button, HyperLink, DropDown
+from framework.ui_elements import TextInput, Locator, Button, HyperLink, DropDown, Table
 
 
 @pytest.fixture
@@ -26,6 +26,11 @@ def dropdown(mock_driver):
 @pytest.fixture
 def hyperlink(mock_driver):
     return HyperLink('#link', mock_driver, By.CSS_SELECTOR)
+
+
+@pytest.fixture
+def table(mock_driver):
+    return Table('//table', mock_driver)
 
 
 def test_text_input_enter_text(text_input, mock_driver, mocker):
@@ -79,7 +84,35 @@ def test_button_text(button, mock_driver, mocker):
     mock_driver.get_text.assert_called_once_with(Locator(By.CSS_SELECTOR, '#button'))
 
 
+def test_table_get_all_rows(table, mock_driver, mocker):
+    mock_row1 = mocker.Mock()
+    mock_row2 = mocker.Mock()
+    mock_driver.find_elements.return_value = [mock_row1, mock_row2]
+
+    rows = table.get_all_rows()
+    assert len(rows) == 2
+    assert rows[0] == mock_row1
+    assert rows[1] == mock_row2
 
 
+def test_table_get_row(table, mock_driver, mocker):
+    mock_row = mocker.Mock()
+    mock_cell1 = mocker.Mock()
+    mock_cell2 = mocker.Mock()
+    mock_row.find_elements.return_value = [mock_cell1, mock_cell2]
+    mock_driver.find_elements.return_value = [mock_row]
+
+    row = table.get_row(0)
+    assert len(row) == 2
+    assert row[0] == mock_cell1
+    assert row[1] == mock_cell2
 
 
+def test_table_get_cell(table, mock_driver, mocker):
+    mock_row = mocker.Mock()
+    mock_cell = mocker.Mock()
+    mock_row.find_elements.return_value = [mock_cell]
+    mock_driver.find_elements.return_value = [mock_row]
+
+    cell = table.get_cell(0, 0)
+    assert cell == mock_cell
